@@ -39,7 +39,10 @@ module.exports = function(grunt) {
 		    {
 			expand: true, 
 			flatten: true,
-			src: ['node_modules/jquery/dist/*.min.js', 'node_modules/bootstrap/dist/js/*.min.js'], 
+			src: [
+			    'node_modules/jquery/dist/*.min.js', 
+			    'node_modules/bootstrap/dist/js/*.min.js'
+			], 
 			dest: 'build/js/',
 			filter: 'isFile' 
 		    }, {
