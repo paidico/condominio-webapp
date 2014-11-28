@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt"><head>
+<html lang="pt">
+  <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +12,11 @@
 
     <!-- custom bootstrap style -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/condominio.css" rel="stylesheet">
+
+    <!-- require js -->
+    <script data-main="main" src="lib/require.js"></script>
   </head>
 
   <body>
@@ -19,26 +24,41 @@
     <!-- navbar -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
-        <div class="nav navbar-nav navbar-right navbar-header">
-          <p class="navbar-brand">
-	    <img src="images/logo.png"> Condomínio
-	  </p>
-        </div>
+        <ul class="nav navbar-nav navbar-right navbar-header">
+	  <li>
+	    <img src="images/logo.png">
+	    <span class="navbar-brand">Condomínio</span>
+	  <li>
+	</ul>
       </div>
     </nav>
 
     <!-- page content -->
     <div class="container">
 
-      <div id="main-page" class="">
+      <div id="main-page" class="hidden">
 	<div role="tabpanel">
+
 	  <!-- nav tabs -->
 	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-	    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-	    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-	    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-	  </ul>
+	    <li role="presentation" class="active">
+	      <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
+	    </li>
+	    <li role="presentation">
+	      <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+	    </li>
+	    <li role="presentation">
+	      <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+	    </li>
+	    <li role="presentation">
+	      <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+	    </li>
+	    <li role="presentation">
+	      <a href="#logout" aria-controls="logout" role="tab" data-toggle="tab" class="text-danger">Logout</a>
+	    </li>
+	  </ul><!-- ul[role="tablist"] -->
+
+	  <!-- tab content -->
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane fade in active" id="home">
 	      <div class="content">
@@ -51,26 +71,44 @@
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="messages">...</div>
 	    <div role="tabpanel" class="tab-pane fade" id="settings">...</div>
-	  </div>
-	</div>
+	    <div role="tabpanel" class="tab-pane fade" id="logout">
+	      <div class="content">
+		<h3>Sair</h3>
+		<button id="btn-sair" class="btn btn-danger">
+		  <i class="fa fa-sign-out"></i>&nbsp;Logout
+		</button>
+	      </div>
+</div>
+	  </div><!-- div.tab-content -->
+	</div> <!-- div[role="tabpanel"] -->
       </div><!-- div#main-page -->
 
       <div id="login-page" class="hidden">
 	<h3>Acesso</h3>
+	<form role="form">
+	  <div class="form-group">
+	    <label for="txt-username" class="sr-only">Username</label>
+	    <div class="input-group">
+	      <span class="input-group-addon"><i class="fa fa-user"></i></span>
+	      <input type="text" class="form-control" id="txt-username" placeholder="Username">
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="txt-senha" class="sr-only">Senha</label>
+	    <div class="input-group">
+	      <span class="input-group-addon"><i class="fa fa-key"></i></span>
+	      <input type="password" class="form-control" id="txt-senha" placeholder="Senha">
+	    </div>
+	  </div>
+	  <button type="submit" id="btn-login" class="btn btn-primary"><i class="fa fa-sign-in"></i>&nbsp;Entrar</button>
+	</form>
       </div>
 
     </div><!-- div.container -->
 
-    <!-- page footer -->
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">Condomínio <span class="glyphicon glyphicon-registration-mark"></span></p>
-      </div>
-    </footer>
-
     <!-- javascript -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
   </body>
 </html>

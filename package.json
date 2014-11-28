@@ -1,24 +1,40 @@
 {
-  "name": "grump_project",
-  "title": "grump",
+  "name": "condominio-webapp",
+  "title": "condominio",
   "version": "0.0.1",
   "author": {
     "name": "Adriano Pedro",
-    "email": "paidico@gmail.com"
+    "email": "paidico@gmail.com",
+    "url": "http://github.com/paidico"
   },
+  "licenses": {
+    "type": "MIT",
+    "url": "https://github.com/paidico/condominio-webapp/blob/master/LICENSE"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paidico/condominio-webapp.git"
+  },
+  "maintainers": [
+    {
+      "name": "Adriano Pedro",
+      "email": "paidico@gmail.com"
+    }
+  ],
   "engines": {
     "node": ">= 0.10.0"
   },
   "dependencies": {
     "bootstrap": "latest",
-    "jquery": "latest"
+    "font-awesome": "^4.2.0",
+    "jquery": "latest",
+    "requirejs": "^2.1.15"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-copy": "^0.6.0",
-    "grunt-contrib-less": "^0.11.4",
-    "grunt-customize-bootstrap": "^0.2.0"
+    "grunt": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-customize-bootstrap": "latest"
   }
 }
-// https://www.npmjs.org/package/requirejs 
-// https://www.npmjs.org/package/node-uuid

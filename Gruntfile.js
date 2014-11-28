@@ -1,34 +1,35 @@
-/*global module:false*/
+
 module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
 	'customize-bootstrap': {
-	    yourTarget: {
+	    main: {
 		options: {
 		    bootstrapPath: 'node_modules/bootstrap/',
-		    src: 'app/assets/less/custom/',
-		    dest: 'app/assets/less/'
+		    src: 'src/less/custom/',
+		    dest: 'src/less/'
 		}
 	    }
 	},
+	uglify: {
+	    main: {
+		files: [{
+		    expand: true,
+		    cwd: 'src/js',
+		    src: '**/*.js',
+		    dest: 'build/js'
+		}]
+	    }
+	},
 	less: {
-	    development: {
+	    main: {
 		options: {
-		    paths: ['app/assets']
-		},
-		files: {
-		    'app/assets/css/bootstrap.css': 'app/assets/less/bootstrap.less',
-		    'app/assets/css/grump.css': 'app/assets/less/grump.less'
-		}
-	    },
-	    production: {
-		options: {
-		    paths: ['app/assets'],
 		    cleancss: true
 		},
 		files: {
-		    'app/assets/css/bootstrap.css': 'app/assets/less/bootstrap.less'
+		    'build/css/bootstrap.css': 'src/less/bootstrap.less',
+		    'build/css/condominio.css': 'src/less/condominio.less'
 		}
 	    }
 	},
@@ -39,13 +40,25 @@ module.exports = function(grunt) {
 			expand: true, 
 			flatten: true,
 			src: ['node_modules/jquery/dist/*.min.js', 'node_modules/bootstrap/dist/js/*.min.js'], 
-			dest: 'app/assets/js/',
+			dest: 'build/js/',
 			filter: 'isFile' 
 		    }, {
 			expand: true,
 			flatten: true,
-			src: ['node_modules/bootstrap/dist/fonts/**'], 
-			dest: 'app/assets/fonts/',
+			src: ['node_modules/font-awesome/fonts/**'], 
+			dest: 'build/fonts/',
+			filter: 'isFile'
+		    }, {
+			expand: true,
+			flatten: true,
+			src: ['node_modules/font-awesome/css/*.min.css'], 
+			dest: 'build/css/',
+			filter: 'isFile'
+		    }, {
+			expand: true,
+			flatten: true,
+			src: ['node_modules/requirejs/require.js'], 
+			dest: 'build/lib/',
 			filter: 'isFile'
 		    }
 		]
@@ -56,9 +69,10 @@ module.exports = function(grunt) {
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-customize-bootstrap');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     // Default task.
-    grunt.registerTask('default', ['customize-bootstrap', 'copy', 'less']);
+    grunt.registerTask('default', ['customize-bootstrap', 'copy', 'less', 'uglify']);
 
 };
