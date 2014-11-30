@@ -1,7 +1,7 @@
 define(['jquery', 'utils'], function(jq, u) {
     var selMain = '#main-page', selLogin = '#login-page', selBtn = '#btn-sair';
     var _sair = function() {
-	u.toggleHide.apply(null, [selLogin, selMain]);
+	u.toggleHide.call(null, selLogin)
 	localStorage.clear();
     };
     var _bindBtnSair = function() {
@@ -16,10 +16,10 @@ define(['jquery', 'utils'], function(jq, u) {
 		e.preventDefault();
 		[
 		    { fn: _bindBtnSair },
-		    { fn: u.showTabByName, params: ['home'] },
-		    { fn: u.toggleHide, params: [selMain, selLogin] }
+		    { fn: u.showTabByName, param: 'home' },
+		    { fn: u.toggleHide, param: selMain }
 		].forEach(function(a) { 
-		    a.fn.apply(null, a.params || []); 
+		    a.fn.call(null, a.param)
 		});
 	    });
 	}
