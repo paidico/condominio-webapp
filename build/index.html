@@ -36,6 +36,8 @@
     <!-- page content -->
     <div class="container">
 
+      <div id="field-alert"></div>
+
       <div id="main-page" class="hidden">
 	<div role="tabpanel">
 
@@ -62,7 +64,7 @@
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane fade in active" id="home">
 	      <div class="content">
-		<h3>Olá</h3>
+		<h3>Olá, <span id="lbl-user-presentation"></span></h3>
 		<p class="lead">Navegue entre as opções disponíveis para seu perfil.</p>
 	      </div>
 	    </div>
@@ -102,7 +104,7 @@
 	  </div>
 	  <button type="submit" id="btn-login" class="btn btn-primary">
 	    <i class="fa fa-sign-in"></i>&nbsp;Entrar</button>
-	  <button type="submit" id="btn-signup" class="btn btn-default">
+	  <button id="btn-signup" class="btn btn-default">
 	    <i class="fa fa-sign-up"></i>&nbsp;Registrar-se</button>
 
 	</form>
@@ -142,7 +144,7 @@
 	      <input type="password" class="form-control" id="txt-senha2-signup" placeholder="Confirmação de senha">
 	    </div>
 	  </div>
-	  <button id="btn-submit-signup" class="btn btn-primary">
+	  <button type="submit" id="btn-submit-signup" class="btn btn-primary">
 	    <i class="fa fa-sign-up"></i>&nbsp;Enviar</button>
 	</form>
       </div><!-- div#signup-page -->
@@ -152,6 +154,8 @@
     <!-- javascript -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/tab.min.js"></script>
+    <script src="js/alert.min.js"></script>
 
   </body>
 </html>

@@ -1,3 +1,3 @@
-define(['jquery', 'acesso'], function(jq, a) {
-    jq(document).ready(a.entrar);
+define(['acesso'], function(a) {
+    $(document).ready(a.bind);
 });

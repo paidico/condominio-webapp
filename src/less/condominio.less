@@ -1,5 +1,6 @@
 @primary-color: darken(#507171, 8%);
 @common-height: 40px;
+@common-shadow: -2px 1px 4px #000000;
 
 html {
   position: relative;
@@ -17,6 +18,10 @@ body {
 nav.navbar.navbar-default {
   box-shadow: 0 2px 4px #000000;
   & .navbar-header img {
-    box-shadow: -2px 1px 4px #000000;
+    box-shadow: @common-shadow;
     }
   }
+
+.alert {
+    box-shadow: @common-shadow;
+}

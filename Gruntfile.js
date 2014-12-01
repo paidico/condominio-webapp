@@ -19,6 +19,9 @@ module.exports = function(grunt) {
 		    cwd: 'src/js',
 		    src: '**/*.js',
 		    dest: 'build/js'
+		}, {
+		    'build/js/tab.min.js' : [ 'node_modules/bootstrap/js/tab.js' ],
+		    'build/js/alert.min.js' : [ 'node_modules/bootstrap/js/alert.js' ]
 		}]
 	    }
 	},
