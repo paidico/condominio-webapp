@@ -5,6 +5,8 @@ define(['utils'], function(u) {
     selBtnSair = '#btn-sair',
     selBtnSignup = '#btn-signup',
     selUserPresent = "#lbl-user-presentation",
+    selPanelMoradores = "#panel-moradores",
+    selSearchMoradores = '#search-moradores',
     _sair = function() {
 	u.overlayPage(selLogin);
 	localStorage.clear();
@@ -33,7 +35,7 @@ define(['utils'], function(u) {
 	bind: function() {
 	    u.overlayPage.call(null, selLogin);
 	    // login
-	    $(selLogin + ' > form').submit(function(e) {
+	    $(selLogin + ' form').submit(function(e) {
 		e.preventDefault();
 		
 		var param = { 
@@ -61,7 +63,7 @@ define(['utils'], function(u) {
 		e.preventDefault();
 
 		u.overlayPage.call(null, selSignup);
-		$(selSignup + ' > form').submit(function(ev) {
+		$(selSignup + ' form').submit(function(ev) {
 		    ev.preventDefault();
 
 		    var param = { 
@@ -92,6 +94,14 @@ define(['utils'], function(u) {
 
 		});
 	    });
+	    // moradores
+	    $('a[href="#moradores"]').click(function() {
+		$(selPanelMoradores + ' form').submit(function(e) {
+		    e.preventDefault();
+		    console.log($(selSearchMoradores).val());
+		});
+	    });
+
 	}
     };
 });					     

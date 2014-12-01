@@ -36,7 +36,9 @@
     <!-- page content -->
     <div class="container">
 
-      <div id="field-alert"></div>
+      <div id="field-alert" class="row">
+	<div class="col-xs-12 col-xs-offset-0 col-md-6 col-md-offset-3"></div>
+      </div>
 
       <div id="main-page" class="hidden">
 	<div role="tabpanel">
@@ -47,7 +49,7 @@
 	      <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
 	    </li>
 	    <li role="presentation">
-	      <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+	      <a href="#moradores" aria-controls="moradores" role="tab" data-toggle="tab">Moradores</a>
 	    </li>
 	    <li role="presentation">
 	      <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
@@ -64,12 +66,37 @@
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane fade in active" id="home">
 	      <div class="content">
-		<h3>Olá, <span id="lbl-user-presentation"></span></h3>
+		<h3>Olá, <span class="text-success" id="lbl-user-presentation"></span></h3>
 		<p class="lead">Navegue entre as opções disponíveis para seu perfil.</p>
 	      </div>
 	    </div>
-	    <div role="tabpanel" class="tab-pane fade" id="profile">
-	      <div class="content">...</div>
+	    <div role="tabpanel" class="tab-pane fade" id="moradores">
+	      <div class="content">
+		    <h3>Pesquisa de Moradores</h3>
+		<div class="row">
+		  <div id="panel-moradores" class="col-xs-10 col-xs-offset-2 col-md-8 col-md-offset-4">
+
+		    <form role="form" class="form-inline">
+		      <div class="form-group col-xs-10">
+			<label for="search-moradores" class="sr-only">Moradores</label>
+			<div class="input-group col-xs-12">
+			  <span class="input-group-addon"><i class="fa fa-search"></i></span>
+			  <input type="text" class="form-control" id="search-moradores" placeholder="Nome ou CPF">
+			</div>
+		      </div>
+		      <button type="submit" class="btn btn-primary"><i class="fa fa-chevron-right"></i></button>
+		    </form>
+		  </div>
+		</div>
+		<div class="row">
+		  <div id="panel-moradores-table" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <table class="table table-hover table-bordered table-stripped">
+		      <thead><tr><th>Nome</th><th>CPF</th><th>Bloco</th><th>Apto</th><th></th></tr></thead>
+		      <tbody></tbody>
+		    </table>
+		  </div>
+		</div>
+	      </div>
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="messages">...</div>
 	    <div role="tabpanel" class="tab-pane fade" id="settings">...</div>
@@ -86,67 +113,74 @@
       </div><!-- div#main-page -->
 
       <div id="login-page" class="hidden">
-	<h3>Acesso</h3>
-	<form role="form">
-	  <div class="form-group">
-	    <label for="txt-username" class="sr-only">Username</label>
-	    <div class="input-group">
-	      <span class="input-group-addon"><i class="fa fa-user"></i></span>
-	      <input type="text" class="form-control" id="txt-username" placeholder="Username">
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="txt-senha" class="sr-only">Senha</label>
-	    <div class="input-group">
-	      <span class="input-group-addon"><i class="fa fa-key"></i></span>
-	      <input type="password" class="form-control" id="txt-senha" placeholder="Senha">
-	    </div>
-	  </div>
-	  <button type="submit" id="btn-login" class="btn btn-primary">
-	    <i class="fa fa-sign-in"></i>&nbsp;Entrar</button>
-	  <button id="btn-signup" class="btn btn-default">
-	    <i class="fa fa-sign-up"></i>&nbsp;Registrar-se</button>
+	<div class="row">
+	  <div class="col-xs-12 col-xs-offset-0 col-md-6 col-md-offset-3">
+	    <h3>Acesso</h3>
+	    <form role="form">
+	      <div class="form-group">
+		<label for="txt-username" class="sr-only">Username</label>
+		<div class="input-group">
+		  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+		  <input type="text" class="form-control" id="txt-username" placeholder="Username">
+		</div>
+	      </div>
+	      <div class="form-group">
+		<label for="txt-senha" class="sr-only">Senha</label>
+		<div class="input-group">
+		  <span class="input-group-addon"><i class="fa fa-key"></i></span>
+		  <input type="password" class="form-control" id="txt-senha" placeholder="Senha">
+		</div>
+	      </div>
+	      <button type="submit" id="btn-login" class="btn btn-primary">
+		<i class="fa fa-sign-in"></i>&nbsp;Entrar</button>
+	      <button id="btn-signup" class="btn btn-default">Registrar-se</button>
 
-	</form>
+	    </form>
+	  </div>
+	</div>
       </div><!-- div#login-page -->
 
       <div id="signup-page" class="hidden">
-	<h3>Cadastro</h3>
-	<form role="form">
-	  <div class="form-group">
-	    <label for="txt-username-signup" class="sr-only">Username</label>
-	    <div class="input-group">
-	      <span class="input-group-addon"><i class="fa fa-user"></i></span>
-	      <input type="text" class="form-control" id="txt-username-signup" placeholder="Username">
-	    </div>
+	<div class="row">
+	  <div class="col-xs-12 col-xs-offset-0 col-md-6 col-md-offset-3">
+	    <h3>Cadastro</h3>
+	    <form role="form">
+	      <div class="form-group">
+		<label for="txt-username-signup" class="sr-only">Username</label>
+		<div class="input-group">
+		  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+		  <input type="text" class="form-control" id="txt-username-signup" placeholder="Username">
+		</div>
+	      </div>
+	      <div class="form-group">
+		<label for="lst-user-type-signup" class="sr-only">User type</label>
+		<div class="input-group">
+		  <span class="input-group-addon"><i class="fa fa-navicon"></i>&nbsp;Tipo</span>
+		  <select id="lst-user-type-signup" class="form-control">
+		    <option value="ADM">Administrador</option>
+		    <option value="COMUM">Comum</option>
+		  </select>
+		</div>
+	      </div>
+	      <div class="form-group">
+		<label for="txt-senha-signup" class="sr-only">Senha</label>
+		<div class="input-group">
+		  <span class="input-group-addon"><i class="fa fa-key"></i></span>
+		  <input type="password" class="form-control" id="txt-senha-signup" placeholder="Senha">
+		</div>
+	      </div>
+	      <div class="form-group">
+		<label for="txt-senha2-signup" class="sr-only">Confirmação de senha</label>
+		<div class="input-group">
+		  <span class="input-group-addon"><i class="fa fa-key"></i></span>
+		  <input type="password" class="form-control" id="txt-senha2-signup" placeholder="Confirmação de senha">
+		</div>
+	      </div>
+	      <button type="submit" id="btn-submit-signup" class="btn btn-primary">
+		<i class="fa fa-sign-in"></i>&nbsp;Enviar</button>
+	    </form>
 	  </div>
-	  <div class="form-group">
-	    <label for="lst-user-type-signup" class="sr-only">User type</label>
-	    <div class="input-group">
-	      <span class="input-group-addon"><i class="fa fa-navicon"></i>&nbsp;Tipo</span>
-	      <select id="lst-user-type-signup" class="form-control">
-		<option value="ADM">Administrador</option>
-		<option value="COMUM">Comum</option>
-	      </select>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="txt-senha-signup" class="sr-only">Senha</label>
-	    <div class="input-group">
-	      <span class="input-group-addon"><i class="fa fa-key"></i></span>
-	      <input type="password" class="form-control" id="txt-senha-signup" placeholder="Senha">
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="txt-senha2-signup" class="sr-only">Confirmação de senha</label>
-	    <div class="input-group">
-	      <span class="input-group-addon"><i class="fa fa-key"></i></span>
-	      <input type="password" class="form-control" id="txt-senha2-signup" placeholder="Confirmação de senha">
-	    </div>
-	  </div>
-	  <button type="submit" id="btn-submit-signup" class="btn btn-primary">
-	    <i class="fa fa-sign-up"></i>&nbsp;Enviar</button>
-	</form>
+	</div>
       </div><!-- div#signup-page -->
 
     </div><!-- div.container -->
