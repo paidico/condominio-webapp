@@ -1,5 +1,6 @@
 define([], function() {
     var selAlertField = '#field-alert div',
+    selMoradorTable = '#panel-moradores-table > table tbody',
     protocol = 'http',
     domain = 'localhost',
     port = '8086',
@@ -35,13 +36,24 @@ define([], function() {
 		"danger": "Erro!",
 		"warning": "Aviso!"
 	    };
-	    var content = '<div class="alert alert-' + tipo + ' alert-dismissible fade in" role="alert">'
-		+ '<button type="button" class="close" data-dismiss="alert">'
-		+ '<span aria-hidden="true">&times;</span>'
-		+ '<span class="sr-only">Fechar</span>'
-		+ '</button><strong>' + tituloEnum[tipo] + '</strong>&nbsp;' + msg + '</div>';
 
-	    $(selAlertField).html(content);
+	    $(selAlertField)
+		.html($('<div>')
+		      .addClass('alert alert-' + tipo + ' alert-dismissible fade in')
+		      .attr('role', 'alert')
+		      .html($('<button>')
+			    .addClass('close')
+			    .attr({ 'type': 'button', 'data-dismiss': 'alert' })
+			    .html($('<span>')
+				  .attr('aria-hidden', 'true')
+				  .html('&times;'))
+			    .append($('<span>')
+				    .addClass('sr-only')
+				    .html('Fechar')))
+		      .append($('<strong>')
+			      .html(tituloEnum[tipo]))
+		      .append('&nbsp;' + msg));
+
 	    $(selAlertField + ' > .alert').alert();
 	},
 	applyFunctions: function(funcArray) {
@@ -50,6 +62,21 @@ define([], function() {
 	    funcArray.forEach(function(a) { 
 		a.fn.apply(null, a.param ? a.param : []); 
 	    });
+	},
+	clearTableMoradores: function() {
+	    $(selMoradorTable).empty();
+	},
+	populateMorador: function(morador) {
+	    $(selMoradorTable)
+		.append($('<tr>')
+			// nome
+			.html($('<td>').html(morador.nome))
+			// cpf
+			.append($('<td>').html(morador.cpf))
+			// bloco
+			.append($('<td>').html(morador.bloco))
+			// apto
+			.append($('<td>').html(morador.apto)));
 	},
 	aPost: function(url, param, success, fail) {
 	    $.ajax(url, { 

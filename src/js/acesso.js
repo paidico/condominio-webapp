@@ -22,9 +22,6 @@ define(['utils'], function(u) {
 	    { fn: u.overlayPage, param: [selMain] },
 	    { 
 		fn: function() {
-		    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			$('#field-alert').html('');
-		    });
 		    localStorage.setItem('chaveUsuario', user.username + ',' + user.chave.codigo);
 		}
 	    }
@@ -96,12 +93,30 @@ define(['utils'], function(u) {
 	    });
 	    // moradores
 	    $('a[href="#moradores"]').click(function() {
+		var listaMoradores = [];
+		u.clearTableMoradores();
+
 		$(selPanelMoradores + ' form').submit(function(e) {
 		    e.preventDefault();
 		    console.log($(selSearchMoradores).val());
 		});
-	    });
 
+		u.aGet('api/moradores',
+		       null,
+		       function(retorno) {
+			   if(retorno.sucesso 
+			      && retorno.moradores 
+			      && retorno.moradores instanceof Array) {
+			       (listaMoradores = retorno.moradores.slice())
+				   .forEach(u.populateMorador);
+			       return;
+			   }
+			   u.alert('warning', retorno.msg);
+		       },
+		       function() {
+			   u.alert('danger', retorno.msg);
+		       });	
+	    });
 	}
     };
 });					     
