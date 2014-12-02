@@ -1,6 +1,5 @@
 define([], function() {
     var selAlertField = '#field-alert div',
-    selMoradorTable = '#panel-moradores-table > table tbody',
     protocol = 'http',
     domain = 'localhost',
     port = '8086',
@@ -62,22 +61,7 @@ define([], function() {
 	    funcArray.forEach(function(a) { 
 		a.fn.apply(null, a.param ? a.param : []); 
 	    });
-	},
-	clearTableMoradores: function() {
-	    $(selMoradorTable).empty();
-	},
-	populateMorador: function(morador) {
-	    $(selMoradorTable)
-		.append($('<tr>')
-			// nome
-			.html($('<td>').html(morador.nome))
-			// cpf
-			.append($('<td>').html(morador.cpf))
-			// bloco
-			.append($('<td>').html(morador.bloco))
-			// apto
-			.append($('<td>').html(morador.apto)));
-	},
+	},	
 	aPost: function(url, param, success, fail) {
 	    $.ajax(url, { 
 		type: 'POST', 
