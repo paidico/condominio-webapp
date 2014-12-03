@@ -44,7 +44,8 @@ module.exports = function(grunt) {
 			flatten: true,
 			src: [
 			    'node_modules/jquery/dist/*.min.js', 
-			    'node_modules/bootstrap/dist/js/*.min.js'
+			    'node_modules/bootstrap/dist/js/*.min.js',
+			    'lib/jquery-ui/jquery-ui.min.js'
 			], 
 			dest: 'build/js/',
 			filter: 'isFile' 
@@ -57,7 +58,10 @@ module.exports = function(grunt) {
 		    }, {
 			expand: true,
 			flatten: true,
-			src: ['node_modules/font-awesome/css/*.min.css'], 
+			src: [
+			    'node_modules/font-awesome/css/*.min.css',
+			    'lib/jquery-ui/*.min.css'
+			], 
 			dest: 'build/css/',
 			filter: 'isFile'
 		    }, {
@@ -65,6 +69,12 @@ module.exports = function(grunt) {
 			flatten: true,
 			src: ['node_modules/requirejs/require.js'], 
 			dest: 'build/lib/',
+			filter: 'isFile'
+		    }, {
+			expand: true,
+			flatten: true,
+			src: ['lib/jquery-ui/images/*.png'], 
+			dest: 'build/images/',
 			filter: 'isFile'
 		    }
 		]

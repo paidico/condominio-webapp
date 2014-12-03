@@ -24,7 +24,7 @@ define([], function() {
 	    ].forEach(function(p) {
 		$(p).addClass('hidden');
 	    });
-	    $(selAlertField).html('');
+	    $(selAlertField + ' > .alert').alert('close');
 	    $(pag).removeClass('hidden');
 	},
 	showTabByName: function(n) {
@@ -33,7 +33,8 @@ define([], function() {
 	alert: function(tipo, msg) {
 	    var tituloEnum = { 
 		"danger": "Erro!",
-		"warning": "Aviso!"
+		"warning": "Aviso!",
+		"success": "Ok!"
 	    };
 
 	    $(selAlertField)
@@ -89,7 +90,7 @@ define([], function() {
 	aDelete: function(url, param, success, fail) {
 	    $.ajax(url, {
 		type: 'DELETE',
-		data: JSON.stringify(param),
+		data: param,
 		success: success,
 		error: fail
 	    });

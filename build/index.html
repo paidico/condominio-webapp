@@ -13,6 +13,9 @@
     <!-- custom bootstrap style -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.structure.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.theme.min.css" rel="stylesheet">
     <link href="css/condominio.css" rel="stylesheet">
 
     <!-- require js -->
@@ -72,27 +75,78 @@
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="moradores">
 	      <div class="content">
-		    <h3>Pesquisa de Moradores</h3>
+		<h3>Pesquisa de Moradores</h3>
 		<div class="row">
-		  <div id="panel-moradores" class="col-xs-10 col-xs-offset-2 col-md-8 col-md-offset-4">
-
+		  <div id="panel-moradores" class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
 		    <form role="form" class="form-inline">
-		      <div class="form-group col-xs-10">
-			<label for="search-moradores" class="sr-only">Moradores</label>
-			<div class="input-group col-xs-12">
-			  <span class="input-group-addon"><i class="fa fa-search"></i></span>
-			  <input type="text" class="form-control" id="search-moradores" placeholder="Nome ou CPF">
+		      <div class="form-group">
+			<button id="btn-new-morador" type="button" class="btn btn-default">
+			  <i class="fa fa-plus"></i>&nbsp;Novo
+			</button>
+		      </div>
+		      <div class="form-group">
+			<div class="input-group col-lg-12">
+			  <div class="input-group">
+			    <input type="text" class="form-control" id="search-moradores" placeholder="Pesquise por Nome ou CPF">
+			    <span class="input-group-btn">
+			      <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+			    </span>
+			  </div> <!-- /div.input-group -->
+			</div> <!-- /div.input-group col-lg-12 -->
+		      </div>
+		    </form>
+
+		  </div> <!-- div#panel-moradores -->
+		</div>
+		<div id="morador-form-panel" class="row hidden">
+		  <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" action="post">
+		      <div class="form-group col-xs-12">
+			<label for="txt-morador-id" class="sr-only">ID</label>
+			<input type="text" class="form-control" id="txt-morador-id" placeholder="ID" disabled="true" readonly="true">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-8">
+			<label for="txt-morador-nome" class="sr-only">Nome</label>
+			<input type="text" class="form-control" id="txt-morador-nome" placeholder="Nome">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<label for="txt-morador-cpf" class="sr-only">CPF</label>
+			<input type="text" class="form-control" id="txt-morador-cpf" placeholder="CPF">
+		      </div>
+		      <div class="form-group col-xs-6 col-md-4">
+			<label for="txt-morador-apto" class="sr-only">Apartamento</label>
+			<input type="number" class="form-control" id="txt-morador-apto" placeholder="Apartamento">
+		      </div>
+		      <div class="form-group col-xs-6 col-md-4">
+			<label for="txt-morador-bloco" class="sr-only">Bloco</label>
+			<input type="text" class="form-control" id="txt-morador-bloco" placeholder="Bloco">
+		      </div>
+		      <div class="form-group col-xs-4">
+			<label for="txt-morador-dtnasc" class="sr-only">Nascimento</label>
+			<input type="date" class="form-control" id="txt-morador-dtnasc" placeholder="Nascimento">
+		      </div>
+		      <div class="form-group col-xs-12">
+			<div class="input-group">
+			  <label for="txt-morador-email" class="sr-only">E-mail</label>
+			  <div class="input-group-addon"><i class="fa fa-at"></i></div>
+			  <input type="email" class="form-control" id="txt-morador-email" placeholder="E-mail">
 			</div>
 		      </div>
-		      <button type="submit" class="btn btn-primary"><i class="fa fa-chevron-right"></i></button>
+		      <div class="form-group col-xs-12">
+			<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;OK</button>
+		      </div>
 		    </form>
 		  </div>
-		</div>
+		</div> <!-- div#morador-form-panel -->
+
 		<div class="row">
 		  <div id="panel-moradores-table" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
 		    <hr />
 		    <table class="table table-hover table-striped">
-		      <thead><tr><th>Nome</th><th>CPF</th><th>Bloco</th><th>Apto</th><th></th></tr></thead>
+		      <thead>
+			<tr><th>Nome</th><th>CPF</th><th>Bloco</th><th>Apto</th><th></th></tr>
+		      </thead>
 		      <tbody></tbody>
 		    </table>
 		  </div>
@@ -134,7 +188,7 @@
 	      </div>
 	      <button type="submit" id="btn-login" class="btn btn-primary">
 		<i class="fa fa-sign-in"></i>&nbsp;Entrar</button>
-	      <button id="btn-signup" class="btn btn-default">Registrar-se</button>
+	      <button type="button" id="btn-signup" class="btn btn-default">Registrar-se</button>
 
 	    </form>
 	  </div>

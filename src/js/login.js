@@ -7,11 +7,11 @@ define(['utils'], function(u) {
 	    { fn: u.showTabByName, param: ['home'] },
 	    { fn: u.overlayPage, param: ['#main-page'] },
 	    { 
-		fn: localStorage.setItem, 
-		param: [
-		    'chaveUsuario', 
-		    user.username + ',' + user.chave.codigo
-		] 
+		fn: function() {
+		    localStorage.setItem(
+			'chaveUsuario', 
+			user.username + ',' + user.chave.codigo);
+		}
 	    }
 	]);
     };
