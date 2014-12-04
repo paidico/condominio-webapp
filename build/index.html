@@ -77,7 +77,8 @@
 	      <div class="content">
 		<h3>Pesquisa de Moradores</h3>
 		<div class="row">
-		  <div id="panel-moradores" class="col-xs-12 col-xs-offset-0 col-md-8 col-md-offset-2">
+		  <div id="panel-moradores" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
 		    <form role="form" class="form-inline">
 		      <div class="form-group">
 			<button id="btn-new-morador" type="button" class="btn btn-default">
@@ -123,8 +124,11 @@
 			<input type="text" class="form-control" id="txt-morador-bloco" placeholder="Bloco">
 		      </div>
 		      <div class="form-group col-xs-4">
-			<label for="txt-morador-dtnasc" class="sr-only">Nascimento</label>
-			<input type="date" class="form-control" id="txt-morador-dtnasc" placeholder="Nascimento">
+			<div class="input-group">
+			  <label for="txt-morador-dtnasc" class="sr-only">Nascimento</label>
+			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+			  <input type="date" class="form-control" id="txt-morador-dtnasc" placeholder="Nascimento">
+			</div>
 		      </div>
 		      <div class="form-group col-xs-12">
 			<div class="input-group">

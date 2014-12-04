@@ -1,4 +1,4 @@
-define(['utils', 'jquery-ui'], function(u, jqui) {
+define(['utils', 'jquery', 'jquery-ui'], function(u, jq) {
     var removeMorador = function(id, callback, callthis) {
 
 	u.aDelete('api/moradores/' + id,
@@ -54,7 +54,7 @@ define(['utils', 'jquery-ui'], function(u, jqui) {
 	bind: function() {
 
 	    // form
-	    jqui('#txt-morador-dtnasc').datepicker();
+	    jq('#txt-morador-dtnasc').datepicker();
 
 	    // criar
 	    $('#btn-new-morador').click(function(e) {

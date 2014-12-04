@@ -12,6 +12,14 @@ body {
   margin-top: ceil(@common-height * 1.8);
   & > .container {
     padding: ceil(@common-height * 0.3);
+    & table {
+      margin-top: 17px;
+      box-shadow: -1px 1px 2px @primary-color;
+      & > thead > tr {
+	background-color: @primary-color;
+	color: #fff;
+	}
+      }
     }
   }
 
@@ -23,14 +31,9 @@ nav.navbar.navbar-default {
   }
 
 .alert {
-    box-shadow: @common-shadow;
-}
+  box-shadow: @common-shadow;
+  }
 
-table {
-    margin-top: 17px;
-    box-shadow: -1px 1px 2px @primary-color;
-    & > thead > tr {
-	background-color: @primary-color;
-	color: #fff;
-    }
+.ui-datepicker {
+  z-index: 1005 !important;
 }

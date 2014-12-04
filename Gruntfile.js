@@ -74,7 +74,7 @@ module.exports = function(grunt) {
 			expand: true,
 			flatten: true,
 			src: ['lib/jquery-ui/images/*.png'], 
-			dest: 'build/images/',
+			dest: 'build/css/images/',
 			filter: 'isFile'
 		    }
 		]
