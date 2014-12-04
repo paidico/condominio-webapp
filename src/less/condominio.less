@@ -3,37 +3,60 @@
 @common-shadow: -2px 1px 4px #000000;
 
 html {
-  position: relative;
-  min-height: 100%;
-  }
+    position: relative;
+    min-height: 100%;
+}
 
 body {
-  background: url('../images/seamless_paper_texture.png');
-  margin-top: ceil(@common-height * 1.8);
-  & > .container {
-    padding: ceil(@common-height * 0.3);
-    & table {
-      margin-top: 17px;
-      box-shadow: -1px 1px 2px @primary-color;
-      & > thead > tr {
-	background-color: @primary-color;
-	color: #fff;
+    background: url('../images/seamless_paper_texture.png');
+    margin-top: ceil(@common-height * 1.8);
+    & > .container {
+	padding: ceil(@common-height * 0.3);
+	.img-thumb {
+	    height: 100px;
+	    width: 100px;
 	}
-      }
+	.btn-file {
+	    position: relative;
+	    overflow: hidden;
+
+	    & input[type="file"] {
+		position: absolute;
+		top: 0;
+		right: 0;
+		min-width: 100%;
+		min-height: 100%;
+		font-size: 999px;
+		text-align: right;
+		filter: alpha(opacity=0);
+		opacity: 0;
+		outline: none;
+		cursor: inherit;
+		display: block;
+	    }
+	}
+	& table {
+	    margin-top: 17px;
+	    box-shadow: -1px 1px 2px @primary-color;
+	    & > thead > tr {
+		background-color: @primary-color;
+		color: #fff;
+	    }
+	}
     }
-  }
+}
 
 nav.navbar.navbar-default {
-  box-shadow: 0 2px 4px #000000;
-  & .navbar-header img {
-    box-shadow: @common-shadow;
+    box-shadow: 0 2px 4px #000000;
+    & .navbar-header img {
+	box-shadow: @common-shadow;
     }
-  }
+}
 
 .alert {
-  box-shadow: @common-shadow;
-  }
+    box-shadow: @common-shadow;
+}
 
 .ui-datepicker {
-  z-index: 1005 !important;
+    z-index: 1005 !important;
 }

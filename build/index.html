@@ -104,6 +104,17 @@
 		    <hr />
 		    <form role="form" action="post">
 		      <div class="form-group col-xs-12">
+			<div class="input-group">
+			  <label for="img-morador" class="sr-only">Foto</label>
+			  <img id="img-morador-thumb" src="images/picture.png" alt="Foto" class="img-thumbnail img-thumb">
+			  <span class="btn btn-default btn-lg btn-file">
+			    <i class="fa fa-file-image-o"></i>&nbsp;Procurar imagem...
+			    <input type="file" class="form-control" id="img-morador">
+			  </span>
+			  <p class="help-block">Máximo: 4 MB</p>
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12">
 			<label for="txt-morador-id" class="sr-only">ID</label>
 			<input type="text" class="form-control" id="txt-morador-id" placeholder="ID" disabled="true" readonly="true">
 		      </div>
@@ -123,7 +134,7 @@
 			<label for="txt-morador-bloco" class="sr-only">Bloco</label>
 			<input type="text" class="form-control" id="txt-morador-bloco" placeholder="Bloco">
 		      </div>
-		      <div class="form-group col-xs-4">
+		      <div class="form-group col-xs-12 col-md-4">
 			<div class="input-group">
 			  <label for="txt-morador-dtnasc" class="sr-only">Nascimento</label>
 			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
@@ -137,7 +148,29 @@
 			  <input type="email" class="form-control" id="txt-morador-email" placeholder="E-mail">
 			</div>
 		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-morador-tel-res" class="sr-only">Tel. Residencial</label>
+			  <div class="input-group-addon"><i class="fa fa-home"></i></div>
+			  <input type="text" class="form-control" id="txt-morador-tel-res" placeholder="Tel. Residencial">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-morador-tel-cel" class="sr-only">Tel. Móvel</label>
+			  <div class="input-group-addon"><i class="fa fa-mobile"></i></div>
+			  <input type="text" class="form-control" id="txt-morador-tel-cel" placeholder="Tel. Móvel">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-morador-tel-com" class="sr-only">Tel. Comercial</label>
+			  <div class="input-group-addon"><i class="fa fa-building"></i></div>
+			  <input type="text" class="form-control" id="txt-morador-tel-com" placeholder="Tel. Comercial">
+			</div>
+		      </div>
 		      <div class="form-group col-xs-12">
+			<hr />
 			<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;OK</button>
 		      </div>
 		    </form>

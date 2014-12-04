@@ -14,6 +14,8 @@ define([
 		bind: function() {
 		    $('#btn-sair').click(function() {
 			u.overlayPage('#login-page');
+			$('form').each(function() { this.reset(); });
+			$('#img-morador-thumb').attr('src', 'images/picture.png');
 			localStorage.clear();
 		    });
 		}
