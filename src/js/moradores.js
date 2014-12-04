@@ -153,7 +153,8 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 				movel: $('#txt-morador-tel-cel').val(),
 				comercial: $('#txt-morador-tel-com').val(),
 			    },
-			    email: $('#txt-morador-email').val()
+			    email: $('#txt-morador-email').val(),
+			    obs: $('#txt-morador-obs').val()
 			}
 		    };
 		    getImagem(function(blob) {

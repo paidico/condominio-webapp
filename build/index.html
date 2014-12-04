@@ -55,10 +55,16 @@
 	      <a href="#moradores" aria-controls="moradores" role="tab" data-toggle="tab">Moradores</a>
 	    </li>
 	    <li role="presentation">
-	      <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+	      <a href="#funcionarios" aria-controls="funcionarios" role="tab" data-toggle="tab">Funcionários</a>
 	    </li>
 	    <li role="presentation">
-	      <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+	      <a href="#autorizados" aria-controls="autorizados" role="tab" data-toggle="tab">Autorizados</a>
+	    </li>
+	    <li role="presentation">
+	      <a href="#reclamacoes" aria-controls="reclamacoes" role="tab" data-toggle="tab">Reclamações</a>
+	    </li>
+	    <li role="presentation">
+	      <a href="#ocorrencias" aria-controls="ocorrencias" role="tab" data-toggle="tab">Ocorrências</a>
 	    </li>
 	    <li role="presentation">
 	      <a href="#logout" aria-controls="logout" role="tab" data-toggle="tab" class="text-danger">Logout</a>
@@ -70,7 +76,7 @@
 	    <div role="tabpanel" class="tab-pane fade in active" id="home">
 	      <div class="content">
 		<h3>Olá, <span class="text-success" id="lbl-user-presentation"></span></h3>
-		<p class="lead">Navegue entre as opções disponíveis para seu perfil.</p>
+		<p class="lead">Navegue entre as opções gestão de condomínio.</p>
 	      </div>
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="moradores">
@@ -106,7 +112,7 @@
 		      <div class="form-group col-xs-12">
 			<div class="input-group">
 			  <label for="img-morador" class="sr-only">Foto</label>
-			  <img id="img-morador-thumb" src="images/picture.png" alt="Foto" class="img-thumbnail img-thumb">
+			  <img id="img-morador-thumb" src="images/picture.png" alt="Foto" class="img-circle img-thumb">
 			  <span class="btn btn-default btn-lg btn-file">
 			    <i class="fa fa-file-image-o"></i>&nbsp;Procurar imagem...
 			    <input type="file" class="form-control" id="img-morador">
@@ -126,6 +132,13 @@
 			<label for="txt-morador-cpf" class="sr-only">CPF</label>
 			<input type="text" class="form-control" id="txt-morador-cpf" placeholder="CPF">
 		      </div>
+		      <div class="form-group col-xs-12">
+			<div class="input-group">
+			  <label for="txt-morador-email" class="sr-only">E-mail</label>
+			  <div class="input-group-addon"><i class="fa fa-at"></i></div>
+			  <input type="email" class="form-control" id="txt-morador-email" placeholder="E-mail">
+			</div>
+		      </div>
 		      <div class="form-group col-xs-6 col-md-4">
 			<label for="txt-morador-apto" class="sr-only">Apartamento</label>
 			<input type="number" class="form-control" id="txt-morador-apto" placeholder="Apartamento">
@@ -139,13 +152,6 @@
 			  <label for="txt-morador-dtnasc" class="sr-only">Nascimento</label>
 			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
 			  <input type="date" class="form-control" id="txt-morador-dtnasc" placeholder="Nascimento">
-			</div>
-		      </div>
-		      <div class="form-group col-xs-12">
-			<div class="input-group">
-			  <label for="txt-morador-email" class="sr-only">E-mail</label>
-			  <div class="input-group-addon"><i class="fa fa-at"></i></div>
-			  <input type="email" class="form-control" id="txt-morador-email" placeholder="E-mail">
 			</div>
 		      </div>
 		      <div class="form-group col-xs-12 col-md-4">
@@ -170,6 +176,10 @@
 			</div>
 		      </div>
 		      <div class="form-group col-xs-12">
+			<label for="txt-morador-obs" class="sr-only">Observações</label>
+			<input type="text" class="form-control" id="txt-morador-obs" placeholder="Observações">
+		      </div>	
+		      <div class="form-group col-xs-12">
 			<hr />
 			<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;OK</button>
 		      </div>
@@ -190,8 +200,30 @@
 		</div>
 	      </div>
 	    </div>
-	    <div role="tabpanel" class="tab-pane fade" id="messages">...</div>
-	    <div role="tabpanel" class="tab-pane fade" id="settings">...</div>
+	    <div role="tabpanel" class="tab-pane fade" id="funcionarios">
+	      <div class="content">
+		<h3>Funcionários</h3>
+		<p class="lead">Implementação pendente.</p>
+	      </div>
+	    </div><!-- /div#funcionarios -->
+	    <div role="tabpanel" class="tab-pane fade" id="autorizados">
+	      <div class="content">
+		<h3>Pessoas Autorizadas</h3>
+		<p class="lead">Implementação pendente.</p>
+	      </div>
+	    </div><!-- /div#autorizados -->
+	    <div role="tabpanel" class="tab-pane fade" id="reclamacoes">
+	      <div class="content">
+		<h3>Reclamações</h3>
+		<p class="lead">Implementação pendente.</p>
+	      </div>
+	    </div><!-- /div#reclamacoes -->
+	    <div role="tabpanel" class="tab-pane fade" id="ocorrencias">
+	      <div class="content">
+		<h3>Ocorrências</h3>
+		<p class="lead">Implementação pendente.</p>
+	      </div>
+	    </div><!-- /div#ocorrencias -->
 	    <div role="tabpanel" class="tab-pane fade" id="logout">
 	      <div class="content">
 		<h3>Sair</h3>
