@@ -14,15 +14,21 @@ module.exports = function(grunt) {
 	},
 	uglify: {
 	    main: {
-		files: [{
-		    expand: true,
-		    cwd: 'src/js',
-		    src: '**/*.js',
-		    dest: 'build/js'
-		}, {
-		    'build/js/tab.min.js' : [ 'node_modules/bootstrap/js/tab.js' ],
-		    'build/js/alert.min.js' : [ 'node_modules/bootstrap/js/alert.js' ]
-		}]
+		files: 
+		[
+		    {
+			expand: true,
+			cwd: 'src/js',
+			src: '**/*.js',
+			dest: 'build/js'
+		    }, 
+		    {
+			'build/js/datepicker-pt-BR.min.js': [ 'lib/jquery-ui/datepicker-pt-BR.js' ],
+			'build/js/bootstrap-tab.min.js': [ 'node_modules/bootstrap/js/tab.js' ],
+			'build/js/bootstrap-alert.min.js': [ 'node_modules/bootstrap/js/alert.js' ],
+			'build/lib/require.min.js': [ 'node_modules/requirejs/require.js' ]
+		    }
+		]
 	    }
 	},
 	less: {
@@ -43,8 +49,7 @@ module.exports = function(grunt) {
 			expand: true, 
 			flatten: true,
 			src: [
-			    'node_modules/jquery/dist/*.min.js', 
-			    'node_modules/bootstrap/dist/js/*.min.js',
+			    'node_modules/jquery/dist/jquery.min.js', 
 			    'lib/jquery-ui/jquery-ui.min.js'
 			], 
 			dest: 'build/js/',
@@ -63,12 +68,6 @@ module.exports = function(grunt) {
 			    'lib/jquery-ui/*.min.css'
 			], 
 			dest: 'build/css/',
-			filter: 'isFile'
-		    }, {
-			expand: true,
-			flatten: true,
-			src: ['node_modules/requirejs/require.js'], 
-			dest: 'build/lib/',
 			filter: 'isFile'
 		    }, {
 			expand: true,

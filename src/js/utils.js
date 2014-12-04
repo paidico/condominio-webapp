@@ -1,4 +1,4 @@
-define([], function() {
+define(['jquery', 'alert', 'tab'], function($) {
     var selAlertField = '#field-alert div',
     protocol = 'http',
     domain = 'localhost',

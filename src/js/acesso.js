@@ -1,9 +1,11 @@
 define([
     'utils', 
+    'jquery',
     'login', 
     'signup', 
     'moradores'], function(
 	u, 
+	$,
 	login,
 	signup,
 	moradores) {

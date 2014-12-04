@@ -1,4 +1,4 @@
-define(['utils'], function(u) {
+define(['utils', 'jquery'], function(u, $) {
 
     var entrar = function(user) {
 	$('#lbl-user-presentation').html(user.username);

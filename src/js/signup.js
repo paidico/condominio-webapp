@@ -1,4 +1,4 @@
-define(['utils', 'login'], function(u, login) {
+define(['utils', 'jquery', 'login'], function(u, $, login) {
     return {
 	bind: function() {
 	    $('#btn-signup').click(function(e) {
