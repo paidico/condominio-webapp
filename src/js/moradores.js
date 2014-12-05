@@ -31,6 +31,15 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 		    .append($('<td>').html(morador.bloco))
 		    // apto
 		    .append($('<td>').html(morador.apto))
+		    // nascimento
+		    .append($('<td>')
+			    .html(morador.dtNascimento 
+				  ? u.reformatDate(morador.dtNascimento, "dd-MM-yy")
+				  : '----'))
+		    // email
+		    .append($('<td>').html($('<a>')
+					   .attr('href', 'mailto:' + morador.email)
+					   .html(morador.email)))
 		    // ações (editar / apagar)
 		    .append($('<td>').html($('<div>')
 					   .addClass('btn-group btn-group-xs pull-right')
@@ -80,9 +89,14 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 
 	    // form
 	    $('#txt-morador-dtnasc').datepicker();
+	    $('#morador-form-eraser').click(function(e) {
+		e.preventDefault();
+		$(this).closest('form')[0].reset();
+		$('#img-morador-thumb').attr('src', 'images/picture.png');
+	    });
 
 	    // form image
-	    $('#img-morador').change(function() { u.handleImagem(this); });
+	    $('#img-morador').change(function() { u.thumbImagem(this); });
 	    
 	    // criar
 	    $('#btn-new-morador').click(function(e) {
@@ -106,7 +120,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 			    obs: $('#txt-morador-obs').val()
 			}
 		    };
-		    u.getImagem($('#img-morador'), function(blob) {
+		    u.serializeImagem(document.getElementById('img-morador'), function(blob) {
 			param.morador.foto = blob;
 			u.aPost('api/moradores',
 				param,
@@ -116,9 +130,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 					$('#morador-form-panel form')[0].reset();
 					$('#img-morador-thumb').attr('src', 'images/picture.png');
 					u.alert('success', retorno.msg);
-					if(callback && typeof callback === 'function') {
-					    callback.call(callthis);
-					}
+					listaMoradores();
 					return;
 				    }
 				    u.alert('warning', retorno.msg);

@@ -1,4 +1,4 @@
-define(['jquery', 'alert', 'tab'], function($) {
+define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 
     var selAlertField = '#field-alert div',
     protocol = 'http',
@@ -45,11 +45,15 @@ define(['jquery', 'alert', 'tab'], function($) {
 	$(selAlertField + ' > .alert').alert();
     },
     validateImagem = function(campo, callback) {
-	if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+	if (!(window.File 
+	      && window.FileReader 
+	      && window.FileList 
+	      && window.Blob)) {
 	    alert('danger', 'Navegador não suporta recurso solicitado');
 	    return;
 	}    
 	if(!campo.value) {            
+	    console.log('ERRO: foto não encontrada');
 	    return;
 	}
 	var img = campo.files[0];
@@ -77,16 +81,17 @@ define(['jquery', 'alert', 'tab'], function($) {
 	callback(img);
     };
     return {
-	handleImagem: function(campo) {
+	thumbImagem: function(campo) {
 	    validateImagem(campo, function(img) {
 		var reader = new FileReader();
 		reader.addEventListener('load', function(ev) {
-		    document.querySelector(campo['data-target-thumb']).src = ev.target.result;
+		    document.querySelector(campo.getAttribute('data-target-thumb'))
+			.setAttribute('src', ev.target.result);
 		});
 		reader.readAsDataURL(img);
 	    });
 	},
-	getImagem: function(campo, callback) {
+	serializeImagem: function(campo, callback) {
 	    validateImagem(campo, function(img) {
 		var reader = new FileReader();
 		reader.addEventListener('load', function(ev) {
@@ -114,7 +119,15 @@ define(['jquery', 'alert', 'tab'], function($) {
 	    funcArray.forEach(function(a) { 
 		a.fn.apply(null, a.param ? a.param : []); 
 	    });
-	},	
+	},
+	reformatDate: function(dtstr, pattern) {
+	    var $d = $.datepicker;
+	    pattern = pattern || $d.ISO_8601;
+
+            return $d.formatDate(pattern, 
+				 $d.parseDate($d.ISO_8601, 
+					      dtstr.replace(/T[\d.:+-]+Z/, '')));
+	},
 	aPost: function(url, param, success, fail) {
 	    $.ajax(url, { 
 		type: 'POST', 

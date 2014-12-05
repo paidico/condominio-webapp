@@ -181,7 +181,14 @@
 		      </div>	
 		      <div class="form-group col-xs-12">
 			<hr />
-			<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;OK</button>
+			<div class="row">
+			  <div class="col-xs-6 col-md-3">
+			    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;OK</button>
+			  </div>
+			  <div class="col-xs-6 col-md-3">
+			    <button id="morador-form-eraser" class="btn btn-default btn-block"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>
+			  </div>
+			</div>
 		      </div>
 		    </form>
 		  </div>
@@ -192,7 +199,9 @@
 		    <hr />
 		    <table class="table table-hover table-striped">
 		      <thead>
-			<tr><th>Nome</th><th>CPF</th><th>Bloco</th><th>Apto</th><th></th></tr>
+			<tr>
+			  <th>Nome</th><th>CPF</th><th>Bloco</th><th>Apto</th><th>Nascimento</th><th>E-mail</th><th></th>
+			</tr>
 		      </thead>
 		      <tbody></tbody>
 		    </table>
