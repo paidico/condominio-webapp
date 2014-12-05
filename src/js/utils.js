@@ -53,7 +53,7 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 	    return;
 	}    
 	if(!campo.value) {            
-	    console.log('ERRO: foto não encontrada');
+	    alert('danger', 'Foto não encontrada');
 	    return;
 	}
 	var img = campo.files[0];
@@ -97,7 +97,7 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 		reader.addEventListener('load', function(ev) {
 		    callback(ev.target.result);
 		});
-		reader.readAsBinaryString(img);
+		reader.readAsText(img, 'base64');
 	    });
 	},
 	overlayPage: function(pag) { 
@@ -128,7 +128,7 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 				 $d.parseDate($d.ISO_8601, 
 					      dtstr.replace(/T[\d.:+-]+Z/, '')));
 	},
-	aPost: function(url, param, success, fail) {
+	POST: function(url, param, success, fail) {
 	    $.ajax(url, { 
 		type: 'POST', 
 		data: JSON.stringify(param), 
@@ -136,7 +136,7 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 		error: fail 
 	    });
 	},
-	aGet: function(url, param, success, fail) {
+	GET: function(url, param, success, fail) {
 	    $.ajax(url, {
 		type: 'GET',
 		data: param,
@@ -144,7 +144,7 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 		error: fail
 	    });
 	},
-	aPut: function(url, param, success, fail) {
+	PUT: function(url, param, success, fail) {
 	    (url, {
 		type: 'PUT',
 		data: JSON.stringify(param),
@@ -152,7 +152,7 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 		error: fail
 	    });
 	},
-	aDelete: function(url, param, success, fail) {
+	DELETE: function(url, param, success, fail) {
 	    $.ajax(url, {
 		type: 'DELETE',
 		data: param,

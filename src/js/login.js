@@ -30,7 +30,7 @@ define(['utils', 'jquery'], function(u, $) {
 		    }
 		};
 		this.reset();
-		u.aPost('api/login', 
+		u['POST']('api/login', 
 			param, 
 			function(retorno) {
 			    if(retorno.sucesso && retorno.usuario) {

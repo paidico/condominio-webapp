@@ -21,7 +21,7 @@ define(['utils', 'jquery', 'login'], function(u, $, login) {
 			return;
 		    }
 		    this.reset();
-		    u.aPost('api/signup',
+		    u['POST']('api/signup',
 			    param,
 			    function(retorno) {
 				if(retorno.sucesso && retorno.usuario) {
