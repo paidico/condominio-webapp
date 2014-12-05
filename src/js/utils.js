@@ -1,4 +1,5 @@
 define(['jquery', 'alert', 'tab'], function($) {
+
     var selAlertField = '#field-alert div',
     protocol = 'http',
     domain = 'localhost',
@@ -16,8 +17,84 @@ define(['jquery', 'alert', 'tab'], function($) {
 	    settings.url = prefixo + settings.url;
             jqxhr.setRequestHeader('x-chave-usuario', localStorage.getItem('chaveUsuario') || '');
 	}
-    });
+    }),
+    alert = function(tipo, msg) {
+	var tituloEnum = { 
+	    "danger": "Erro!",
+	    "warning": "Aviso!",
+	    "success": "Ok!"
+	};
+
+	$(selAlertField)
+	    .html($('<div>')
+		  .addClass('alert alert-' + tipo + ' alert-dismissible fade in')
+		  .attr('role', 'alert')
+		  .html($('<button>')
+			.addClass('close')
+			.attr({ 'type': 'button', 'data-dismiss': 'alert' })
+			.html($('<span>')
+			      .attr('aria-hidden', 'true')
+			      .html('&times;'))
+			.append($('<span>')
+				.addClass('sr-only')
+				.html('Fechar')))
+		  .append($('<strong>')
+			  .html(tituloEnum[tipo]))
+		  .append('&nbsp;' + msg));
+
+	$(selAlertField + ' > .alert').alert();
+    },
+    validateImagem = function(campo, callback) {
+	if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+	    alert('danger', 'Navegador não suporta recurso solicitado');
+	    return;
+	}    
+	if(!campo.value) {            
+	    return;
+	}
+	var img = campo.files[0];
+	var fsize = img.size;
+	var ftype = img.type;       
+
+	switch(ftype) {
+	case 'image/png': 
+	case 'image/gif': 
+	case 'image/jpeg': 
+	case 'image/pjpeg':
+	    // fallthrough proposital
+	    break;
+	default:
+	    alert('danger', 'Tipo de arquivo não suportado');
+	    return;
+	}
+	
+	// limite
+	if(fsize > 1048576) {
+	    alert('danger', 'Tamanho da imagem excede o limite');
+	    return;
+	}
+
+	callback(img);
+    };
     return {
+	handleImagem: function(campo) {
+	    validateImagem(campo, function(img) {
+		var reader = new FileReader();
+		reader.addEventListener('load', function(ev) {
+		    document.querySelector(campo['data-target-thumb']).src = ev.target.result;
+		});
+		reader.readAsDataURL(img);
+	    });
+	},
+	getImagem: function(campo, callback) {
+	    validateImagem(campo, function(img) {
+		var reader = new FileReader();
+		reader.addEventListener('load', function(ev) {
+		    callback(ev.target.result);
+		});
+		reader.readAsBinaryString(img);
+	    });
+	},
 	overlayPage: function(pag) { 
 	    [
 		'#main-page', '#login-page', '#signup-page'
@@ -30,32 +107,7 @@ define(['jquery', 'alert', 'tab'], function($) {
 	showTabByName: function(n) {
 	    $('ul[role="tablist"] a[href="#' + n + '"]').tab('show');
 	},
-	alert: function(tipo, msg) {
-	    var tituloEnum = { 
-		"danger": "Erro!",
-		"warning": "Aviso!",
-		"success": "Ok!"
-	    };
-
-	    $(selAlertField)
-		.html($('<div>')
-		      .addClass('alert alert-' + tipo + ' alert-dismissible fade in')
-		      .attr('role', 'alert')
-		      .html($('<button>')
-			    .addClass('close')
-			    .attr({ 'type': 'button', 'data-dismiss': 'alert' })
-			    .html($('<span>')
-				  .attr('aria-hidden', 'true')
-				  .html('&times;'))
-			    .append($('<span>')
-				    .addClass('sr-only')
-				    .html('Fechar')))
-		      .append($('<strong>')
-			      .html(tituloEnum[tipo]))
-		      .append('&nbsp;' + msg));
-
-	    $(selAlertField + ' > .alert').alert();
-	},
+	alert: alert,
 	applyFunctions: function(funcArray) {
 	    // função: fn
 	    // parâmetro: [param]

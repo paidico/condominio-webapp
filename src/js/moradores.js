@@ -1,56 +1,5 @@
 define(['utils', 'jquery', 'datepicker'], function(u, $) {
 
-    var validateImagem = function(callback) {
-	if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
-	    u.alert('danger', 'Navegador não suporta recurso solicitado');
-	    return;
-	}    
-	if( !$('#img-morador').val()) {            
-	    return;
-	}
-	var img = $('#img-morador')[0].files[0];
-	var fsize = img.size;
-	var ftype = img.type;       
-
-	switch(ftype) {
-	case 'image/png': 
-	case 'image/gif': 
-	case 'image/jpeg': 
-	case 'image/pjpeg':
-	    // fallthrough proposital
-	    break;
-	default:
-	    u.alert('danger', 'Tipo de arquivo não suportado');
-	    return;
-	}
-	
-	// 4 MB eq 4.194.304
-	if(fsize > 4194304) {
-	    u.alert('danger', 'Tamanho da imagem excede o limite');
-	    return;
-	}
-
-	callback(img);
-    };
-
-    var getImagem = function(callback) {
-	validateImagem(function(img) {
-	    var reader = new FileReader();
-	    reader.addEventListener('load', function(ev) {
-		callback(ev.target.result);
-	    });
-	    reader.readAsBinaryString(img);
-	});
-    };
-    var handleImagem = function() {
-	validateImagem(function(img) {
-	    var reader = new FileReader();
-	    reader.addEventListener('load', function(ev) {
-		$('#img-morador-thumb').attr('src', ev.target.result);
-	    });
-	    reader.readAsDataURL(img);
-	});
-    };
     var removeMorador = function(id, callback, callthis) {
 
 	u.aDelete('api/moradores/' + id,
@@ -133,7 +82,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    $('#txt-morador-dtnasc').datepicker();
 
 	    // form image
-	    $('#img-morador').change(handleImagem);
+	    $('#img-morador').change(function() { u.handleImagem(this); });
 	    
 	    // criar
 	    $('#btn-new-morador').click(function(e) {
@@ -157,7 +106,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 			    obs: $('#txt-morador-obs').val()
 			}
 		    };
-		    getImagem(function(blob) {
+		    u.getImagem($('#img-morador'), function(blob) {
 			param.morador.foto = blob;
 			u.aPost('api/moradores',
 				param,
