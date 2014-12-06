@@ -1,76 +1,31 @@
 define(['utils', 'jquery', 'datepicker'], function(u, $) {
+    var enumVerb = {
+	PUT: { keepId: true },
+	POST: { url: 'api/moradores' }
+    };
 
-    var saveMorador = function(action, callback) {
-	var enumVerb = {
-	    PUT: {
-		url: 'api/moradores/' + $('#txt-morador-id').val(),
-		keepId: true
-	    },
-	    POST: { url: 'api/moradores' }
-	};
+    var saveMorador = function(action) {
 	if(!enumVerb[action]) {
 	    u.alert('danger', 'Ação desconhecida a ser enviada para o serviço');
 	    return;
 	}
 
+	setTimeout(function() { 
+	    enumVerb['PUT'].url = 'api/moradores/' + $('#txt-morador-id').val();
+	}, 800);
 	clearForm(action, enumVerb[action].keepId);
 
 	$('#morador-form-panel').removeClass('hidden');
 
-	$('#morador-form-panel form').submit(function(e) {
-	    e.preventDefault();
-	    var param = {
-		morador: {
-		    nome: $('#txt-morador-nome').val(),
-		    cpf: $('#txt-morador-cpf').val(),
-		    apto: $('#txt-morador-apto').val(),
-		    bloco: $('#txt-morador-bloco').val(),
-		    dtNascimento: $('#txt-morador-dtnasc').datepicker('getDate'),
-		    tel: {
-			residencial: $('#txt-morador-tel-res').val(),
-			movel: $('#txt-morador-tel-cel').val(),
-			comercial: $('#txt-morador-tel-com').val(),
-		    },
-		    email: $('#txt-morador-email').val(),
-		    obs: $('#txt-morador-obs').val()
-		}
-	    };
-	    param.morador.foto = $('#img-morador-thumb').attr('src');
-	    u[action](enumVerb[action].url,
-	    	      param,
-	    	      function(retorno) {
-	    		  if(retorno.sucesso) {
-	    		      clearForm();
-	    		      u.alert('success', retorno.msg);
-    			      listaMoradores();
-	    		      if(callback && typeof callback === 'function') {
-	    			  callback();
-	    		      }
-	    		      return;
-	    		  }
-	    		  u.alert('warning', retorno.msg);
-	    	      },
-	    	      function() {
-	    		  u.alert('danger', retorno.msg);
-	    	      });	
-	});
     };
     var removeMorador = function(id, callback, callthis) {
 
 	u['DELETE']('api/moradores/' + id,
 		    null,
-		    function(retorno) {
-			if(retorno.sucesso) {
-			    u.alert('success', retorno.msg);
-			    if(callback && typeof callback === 'function') {
-				callback.call(callthis);
-			    }
-			    return;
-			}
-			u.alert('warning', retorno.msg);
-		    },
 		    function() {
-			u.alert('danger', retorno.msg);
+			if(callback && typeof callback === 'function') {
+			    callback.call(callthis);
+			}
 		    });	
     };
 
@@ -91,7 +46,9 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	$('#txt-morador-cpf').val(morador.cpf);
 	$('#txt-morador-apto').val(morador.apto);
 	$('#txt-morador-bloco').val(morador.bloco);
-	$('#txt-morador-dtnasc').val(u.reformatDate(morador.dtNascimento, 'dd/mm/yy'));
+	if(morador.dtNascimento) {
+	    $('#txt-morador-dtnasc').val(u.reformatDate(morador.dtNascimento, 'dd/mm/yy'));
+	}
 	if(morador.tel) {
 	    $('#txt-morador-tel-res').val(morador.tel.residencial);
 	    $('#txt-morador-tel-cel').val(morador.tel.movel);
@@ -99,7 +56,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	}
 	$('#txt-morador-email').val(morador.email);
 	$('#txt-morador-obs').val(morador.obs);
-	$('#img-morador-thumb').attr('src', morador.foto);
+	$('#img-morador-thumb').attr('src', morador.foto || 'images/picture.png');
     };
 
     var populateMorador = function(morador) {
@@ -117,8 +74,8 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 		    // nascimento
 		    .append($('<td>')
 			    .html(morador.dtNascimento 
-				  ? u.reformatDate(morador.dtNascimento, "dd-MM-yy")
-				  : '----'))
+				  ? u.reformatDate(morador.dtNascimento, "dd-M-yy")
+				  : ''))
 		    // email
 		    .append($('<td>').html($('<a>')
 					   .attr('href', 'mailto:' + morador.email)
@@ -152,8 +109,14 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	$('#panel-moradores-table > table tbody').empty();
 
 	u['GET']('api/moradores',
-		 null,
+		 null, // param
+		 null, // success
+		 null, // fail
 		 function(retorno) {
+		     if(!retorno) {
+	    		 u.alert('danger', 'Serviço não retornou informação');
+			 return;
+		     }
 		     if(retorno.sucesso 
 			&& retorno.moradores 
 			&& retorno.moradores instanceof Array) {
@@ -161,9 +124,6 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 			 return;
 		     }
 		     u.alert('warning', retorno.msg);
-		 },
-		 function() {
-		     u.alert('danger', retorno.msg);
 		 });	
     };
     return {
@@ -171,17 +131,61 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    // search
 	    $('#panel-moradores form').submit(function(e) {
 		e.preventDefault();
-		console.log($('#search-moradores').val());
+
+		u['POST']('api/moradores/search',
+			  { termo: $('#search-moradores').val() },
+			  function(retorno) {
+			      if(retorno.moradores 
+				 && retorno.moradores instanceof Array
+				 && retorno.moradores.length) {
+				  $('#panel-moradores-table > table tbody').empty();
+				  retorno.moradores.slice().forEach(populateMorador);
+			      } else {
+				  u.alert('warning', 'Busca não retornou resultados');
+			      }
+			  });
 	    });
 
 	    // form
 	    $('#txt-morador-dtnasc').datepicker();
 	    $('#morador-form-eraser').click(function() {
 		clearForm($('#morador-form-panel form').attr('action'), 
-			  $('#txt-morador-id').val() && $('#txt-morador-id').val().length);
+			  $('#txt-morador-id').val() 
+			  && $('#txt-morador-id').val().length
+			  ? $('#txt-morador-id').val() : null);
 	    });
 	    // form image
 	    $('#img-morador').change(function() { u.thumbImagem(this); });
+	    // form submit
+	    $('#morador-form-panel form').submit(function(e) {
+		e.preventDefault();
+		var param = {
+		    morador: {
+			nome: $('#txt-morador-nome').val(),
+			cpf: $('#txt-morador-cpf').val(),
+			apto: $('#txt-morador-apto').val(),
+			bloco: $('#txt-morador-bloco').val(),
+			dtNascimento: $('#txt-morador-dtnasc').datepicker('getDate'),
+			tel: {
+			    residencial: $('#txt-morador-tel-res').val(),
+			    movel: $('#txt-morador-tel-cel').val(),
+			    comercial: $('#txt-morador-tel-com').val(),
+			},
+			email: $('#txt-morador-email').val(),
+			obs: $('#txt-morador-obs').val()
+		    }
+		};
+		var foto = $('#img-morador-thumb').attr('src');
+		var action = $('#morador-form-panel form').attr('action');
+		param.morador.foto = /^data:image\//.test(foto) ? foto : null;
+
+		u[action](enumVerb[action].url,
+	    		  param,
+			  function() {
+    			      listaMoradores();
+	    		      clearForm();
+			  });	
+	    });
 	    
 	    // criar
 	    $('#btn-new-morador').click(function() { saveMorador('POST'); });

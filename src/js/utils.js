@@ -6,11 +6,6 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
     port = '8086',
     prefixo = protocol + '://' + domain + ':' + port + '/';
     $.ajaxSetup({
-	statusCode: {
-	    404: function() {
-		console.log('Conteúdo não encontrado');
-	    }
-	},
 	contentType: 'application/json; charset=UTF-8',
 	dataType: 'json',
 	beforeSend: function(jqxhr, settings) {
@@ -18,6 +13,26 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
             jqxhr.setRequestHeader('x-chave-usuario', localStorage.getItem('chaveUsuario') || '');
 	}
     }),
+    ajaxError = function(retorno, callback) { 
+	alert('danger', retorno.msg); 
+	if(callback && typeof callback === 'function') {
+	    callback(retorno);
+	}
+    },
+    ajaxSuccess = function(retorno, callback) {
+	if(!retorno) {
+	    alert('danger', 'Serviço não retornou informação');
+	    return;
+	}
+	if(retorno.sucesso) {
+	    alert('success', retorno.msg);
+	    if(callback && typeof callback === 'function') {
+		callback(retorno);
+	    }
+	    return;
+	}
+	alert('warning', retorno.msg);
+    },
     alert = function(tipo, msg) {
 	var tituloEnum = { 
 	    "danger": "Erro!",
@@ -132,32 +147,32 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 	    $.ajax(url, { 
 		type: 'POST', 
 		data: JSON.stringify(param), 
-		success: success, 
-		error: fail 
+		success: function(r) { ajaxSuccess(r, success); },
+		error: function(r) { ajaxError(r, fail); }
 	    });
 	},
-	GET: function(url, param, success, fail) {
+	GET: function(url, param, success, fail, replaceSucess) {
 	    $.ajax(url, {
 		type: 'GET',
 		data: param,
-		success: success,
-		error: fail
+		success: replaceSucess || function(r) { ajaxSuccess(r, success); },
+		error: function(r) { ajaxError(r, fail); }
 	    });
 	},
 	PUT: function(url, param, success, fail) {
-	    (url, {
+	    $.ajax(url, {
 		type: 'PUT',
 		data: JSON.stringify(param),
-		success: success,
-		error: fail
+		success: function(r) { ajaxSuccess(r, success); },
+		error: function(r) { ajaxError(r, fail); }
 	    });
 	},
 	DELETE: function(url, param, success, fail) {
 	    $.ajax(url, {
 		type: 'DELETE',
 		data: param,
-		success: success,
-		error: fail
+		success: function(r) { ajaxSuccess(r, success); },
+		error: function(r) { ajaxError(r, fail); }
 	    });
 	}
     };
