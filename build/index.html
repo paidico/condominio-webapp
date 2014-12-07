@@ -211,8 +211,135 @@
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="funcionarios">
 	      <div class="content">
-		<h3>Funcionários</h3>
-		<p class="lead">Implementação pendente.</p>
+		<h3>Pesquisa de Funcionários</h3>
+		<div class="row">
+		  <div id="panel-funcionarios" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" class="form-inline">
+		      <div class="form-group">
+			<button id="btn-new-funcionario" type="button" class="btn btn-default">
+			  <i class="fa fa-plus"></i>&nbsp;Novo
+			</button>
+		      </div>
+		      <div class="form-group">
+			<div class="input-group col-lg-12">
+			  <div class="input-group">
+			    <input type="text" class="form-control" id="search-funcionarios" placeholder="Pesquise por Nome ou CPF">
+			    <span class="input-group-btn">
+			      <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+			    </span>
+			  </div> <!-- /div.input-group -->
+			</div> <!-- /div.input-group col-lg-12 -->
+		      </div>
+		    </form>
+
+		  </div> <!-- div#panel-funcionarios -->
+		</div>
+		<div id="funcionario-form-panel" class="row hidden">
+		  <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" action="post">
+		      <div class="form-group col-xs-12">
+			<div class="input-group">
+			  <label for="img-funcionario" class="sr-only">Foto</label>
+			  <img id="img-funcionario-thumb" src="images/picture.png" alt="Foto" class="img-circle img-thumb">
+			  <span class="btn btn-default btn-lg btn-file">
+			    <i class="fa fa-file-image-o"></i>&nbsp;Procurar imagem...
+			    <input type="file" class="form-control" id="img-funcionario" data-target-thumb="#img-funcionario-thumb">
+			  </span>
+			  <p class="help-block">Máximo: 1 MB</p>
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12">
+			<label for="txt-funcionario-id" class="sr-only">ID</label>
+			<input type="text" class="form-control" id="txt-funcionario-id" placeholder="ID" disabled="true" readonly="true">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-8">
+			<label for="txt-funcionario-nome" class="sr-only">Nome</label>
+			<input type="text" class="form-control" id="txt-funcionario-nome" placeholder="Nome">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<label for="txt-funcionario-cpf" class="sr-only">CPF</label>
+			<input type="text" class="form-control" id="txt-funcionario-cpf" placeholder="CPF">
+		      </div>
+		      <div class="form-group col-xs-12">
+			<div class="input-group">
+			  <label for="txt-funcionario-email" class="sr-only">E-mail</label>
+			  <div class="input-group-addon"><i class="fa fa-at"></i></div>
+			  <input type="email" class="form-control" id="txt-funcionario-email" placeholder="E-mail">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12">
+			<label for="txt-funcionario-end" class="sr-only">Endereço</label>
+			<input type="text" class="form-control" id="txt-funcionario-end" placeholder="Endereço">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-funcionario-dtnasc" class="sr-only">Nascimento</label>
+			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+			  <input type="date" class="form-control" id="txt-funcionario-dtnasc" placeholder="Nascimento">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-funcionario-dtadmiss" class="sr-only">Admissão</label>
+			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+			  <input type="date" class="form-control" id="txt-funcionario-dtadmiss" placeholder="Admissão">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-funcionario-dtdemiss" class="sr-only">Demissão</label>
+			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+			  <input type="date" class="form-control" id="txt-funcionario-dtdemiss" placeholder="Demissão">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-6">
+			<div class="input-group">
+			  <label for="txt-funcionario-tel-res" class="sr-only">Tel. Residencial</label>
+			  <div class="input-group-addon"><i class="fa fa-home"></i></div>
+			  <input type="text" class="form-control" id="txt-funcionario-tel-res" placeholder="Tel. Residencial">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-6">
+			<div class="input-group">
+			  <label for="txt-funcionario-tel-cel" class="sr-only">Tel. Móvel</label>
+			  <div class="input-group-addon"><i class="fa fa-mobile"></i></div>
+			  <input type="text" class="form-control" id="txt-funcionario-tel-cel" placeholder="Tel. Móvel">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12">
+			<label for="txt-funcionario-obs" class="sr-only">Observações</label>
+			<textarea class="form-control" id="txt-funcionario-obs" rows="3" placeholder="Observações"></textarea>
+		      </div>	
+		      <div class="form-group col-xs-12">
+			<hr />
+			<div class="row">
+			  <div class="col-xs-6 col-md-3">
+			    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;OK</button>
+			  </div>
+			  <div class="col-xs-6 col-md-3">
+			    <button id="funcionario-form-eraser" class="btn btn-default btn-block"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>
+			  </div>
+			</div>
+		      </div>
+		    </form>
+		  </div>
+		</div> <!-- /div#funcionario-form-panel -->
+
+		<div class="row">
+		  <div id="panel-funcionarios-table" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <table class="table table-hover table-striped">
+		      <thead>
+			<tr>
+			  <th>Nome</th><th>CPF</th><th>Admissão</th><th>Demissão</th><th>Nascimento</th><th>E-mail</th><th></th>
+			</tr>
+		      </thead>
+		      <tbody></tbody>
+		    </table>
+		  </div>
+		</div>
 	      </div>
 	    </div><!-- /div#funcionarios -->
 	    <div role="tabpanel" class="tab-pane fade" id="autorizados">

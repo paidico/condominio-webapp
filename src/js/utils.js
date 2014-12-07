@@ -105,16 +105,17 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 		});
 		reader.readAsDataURL(img);
 	    });
-	},
-	serializeImagem: function(campo, callback) {
-	    validateImagem(campo, function(img) {
-		var reader = new FileReader();
-		reader.addEventListener('load', function(ev) {
-		    callback(ev.target.result);
-		});
-		reader.readAsText(img, 'base64');
-	    });
-	},
+	}// ,
+	// serializeImagem: function(campo, callback) {
+	//     validateImagem(campo, function(img) {
+	// 	var reader = new FileReader();
+	// 	reader.addEventListener('load', function(ev) {
+	// 	    callback(ev.target.result);
+	// 	});
+	// 	reader.readAsText(img, 'base64');
+	//     });
+	// }
+	,
 	overlayPage: function(pag) { 
 	    [
 		'#main-page', '#login-page', '#signup-page'
