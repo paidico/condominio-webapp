@@ -54,7 +54,7 @@
 	    <li role="presentation">
 	      <a href="#moradores" aria-controls="moradores" role="tab" data-toggle="tab">Moradores</a>
 	    </li>
-	    <li role="presentation">
+	    <li role="presentation" data-type-permission="ADM">
 	      <a href="#funcionarios" aria-controls="funcionarios" role="tab" data-toggle="tab">Funcionários</a>
 	    </li>
 	    <li role="presentation">
@@ -65,6 +65,9 @@
 	    </li>
 	    <li role="presentation">
 	      <a href="#ocorrencias" aria-controls="ocorrencias" role="tab" data-toggle="tab">Ocorrências</a>
+	    </li>
+	    <li role="presentation" data-type-permission="ADM">
+	      <a href="#usuarios" aria-controls="usuarios" role="tab" data-toggle="tab">Usuários</a>
 	    </li>
 	    <li role="presentation">
 	      <a href="#logout" aria-controls="logout" role="tab" data-toggle="tab" class="text-danger">Logout</a>
@@ -344,20 +347,229 @@
 	    </div><!-- /div#funcionarios -->
 	    <div role="tabpanel" class="tab-pane fade" id="autorizados">
 	      <div class="content">
-		<h3>Pessoas Autorizadas</h3>
-		<p class="lead">Implementação pendente.</p>
+		<h3>Pesquisa de Pessoas Autorizadas</h3>
+		<div class="row">
+		  <div id="panel-autorizadas" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" class="form-inline">
+		      <div class="form-group">
+			<button id="btn-new-autorizada" type="button" class="btn btn-default">
+			  <i class="fa fa-plus"></i>&nbsp;Nova
+			</button>
+		      </div>
+		      <div class="form-group">
+			<div class="input-group col-lg-12">
+			  <div class="input-group">
+			    <input type="text" class="form-control" id="search-autorizadas" placeholder="Pesquise por Nome ou CPF">
+			    <span class="input-group-btn">
+			      <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+			    </span>
+			  </div> <!-- /div.input-group -->
+			</div> <!-- /div.input-group col-lg-12 -->
+		      </div>
+		    </form>
+
+		  </div> <!-- div#panel-autorizadas -->
+		</div>
+		<div id="autorizada-form-panel" class="row hidden">
+		  <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" action="post">
+		      <div class="form-group col-xs-12">
+			<label for="txt-autorizada-id" class="sr-only">ID</label>
+			<input type="text" class="form-control" id="txt-autorizada-id" placeholder="ID" disabled="true" readonly="true">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-8">
+			<label for="txt-autorizada-nome" class="sr-only">Nome</label>
+			<input type="text" class="form-control" id="txt-autorizada-nome" placeholder="Nome">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<label for="txt-autorizada-cpf" class="sr-only">CPF</label>
+			<input type="text" class="form-control" id="txt-autorizada-cpf" placeholder="CPF">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-autorizada-cel" class="sr-only">Celular</label>
+			  <div class="input-group-addon"><i class="fa fa-mobile"></i></div>
+			  <input type="text" class="form-control" id="txt-autorizada-cel" placeholder="Celular">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<label for="txt-autorizada-apto" class="sr-only">Apartamento</label>
+			<input type="number" class="form-control" id="txt-autorizada-apto" placeholder="Apartamento">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<label for="txt-autorizada-bloco" class="sr-only">Bloco</label>
+			<input type="text" class="form-control" id="txt-autorizada-bloco" placeholder="Bloco">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-6">
+			<div class="input-group">
+			  <label for="txt-autorizada-dtini" class="sr-only">Data Inicial</label>
+			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+			  <input type="date" class="form-control" id="txt-autorizada-dtini" placeholder="Data Inicial">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-6">
+			<div class="input-group">
+			  <label for="txt-autorizada-dtfim" class="sr-only">Data Final</label>
+			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+			  <input type="date" class="form-control" id="txt-autorizada-dtfim" placeholder="Data Final">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-8">
+			<label for="txt-autorizada-autorizador" class="sr-only">Quem Autorizou</label>
+			<input type="text" class="form-control" id="txt-autorizada-autorizador" placeholder="Quem Autorizou">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-autorizada-contato" class="sr-only">Contato</label>
+			  <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+			  <input type="text" class="form-control" id="txt-autorizada-contato" placeholder="Contato">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12">
+			<hr />
+			<div class="row">
+			  <div class="col-xs-6 col-md-3">
+			    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;OK</button>
+			  </div>
+			  <div class="col-xs-6 col-md-3">
+			    <button id="autorizada-form-eraser" class="btn btn-default btn-block"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>
+			  </div>
+			</div>
+		      </div>
+		    </form>
+		  </div>
+		</div> <!-- /div#autorizada-form-panel -->
+
+		<div class="row">
+		  <div id="panel-autorizadas-table" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <table class="table table-hover table-striped">
+		      <thead>
+			<tr>
+			  <th>Nome</th><th>CPF</th><th>Data Inicial</th><th>Data Final</th><th></th>
+			</tr>
+		      </thead>
+		      <tbody></tbody>
+		    </table>
+		  </div>
+		</div>
 	      </div>
 	    </div><!-- /div#autorizados -->
 	    <div role="tabpanel" class="tab-pane fade" id="reclamacoes">
 	      <div class="content">
 		<h3>Reclamações</h3>
-		<p class="lead">Implementação pendente.</p>
+		<div class="row">
+		  <div id="panel-reclamacoes" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" class="form-inline">
+		      <div class="form-group">
+			<button id="btn-new-reclamacao" type="button" class="btn btn-default">
+			  <i class="fa fa-plus"></i>&nbsp;Nova
+			</button>
+		      </div>
+		    </form>
+
+		  </div> <!-- div#panel-reclamacoes -->
+		</div>
+		<div id="reclamacao-form-panel" class="row hidden">
+		  <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" action="post">
+		      <div class="form-group col-xs-12">
+			<label for="txt-reclamacao-id" class="sr-only">ID</label>
+			<input type="text" class="form-control" id="txt-reclamacao-id" placeholder="ID" disabled="true" readonly="true">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-8">
+			<label for="txt-reclamacao-nome" class="sr-only">Nome</label>
+			<input type="text" class="form-control" id="txt-reclamacao-nome" placeholder="Nome">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <span class="input-group-addon"><i class="fa fa-navicon"></i>&nbsp;Situação</span>
+			  <select id="lst-reclamacao-situacao" class="form-control">
+			    <option value="Em processamento">Em processamento</option>
+			    <option value="Visualizada">Visualizada</option>
+			    <option value="Finalizada">Finalizada</option>
+			  </select>
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<label for="txt-reclamacao-apto" class="sr-only">Apartamento</label>
+			<input type="number" class="form-control" id="txt-reclamacao-apto" placeholder="Apartamento">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<label for="txt-reclamacao-bloco" class="sr-only">Bloco</label>
+			<input type="text" class="form-control" id="txt-reclamacao-bloco" placeholder="Bloco">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-reclamacao-dt" class="sr-only">Data</label>
+			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+			  <input type="date" class="form-control" id="txt-reclamacao-dt" placeholder="Data">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12">
+			<label for="txt-reclamacao-resolvedor" class="sr-only">Quem Resolveu</label>
+			<input type="text" class="form-control" id="txt-reclamacao-resolvedor" placeholder="Quem Resolveu">
+		      </div>
+		      <div class="form-group col-xs-12">
+			<label for="txt-reclamacao-descricao" class="sr-only">Descrição</label>
+			<textarea class="form-control" id="txt-reclamacao-descricao" rows="3" placeholder="Descrição"></textarea>
+		      </div>	
+		      <div class="form-group col-xs-12">
+			<hr />
+			<div class="row">
+			  <div class="col-xs-6 col-md-3">
+			    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;OK</button>
+			  </div>
+			  <div class="col-xs-6 col-md-3">
+			    <button id="reclamacao-form-eraser" class="btn btn-default btn-block"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>
+			  </div>
+			</div>
+		      </div>
+		    </form>
+		  </div>
+		</div> <!-- /div#reclamacao-form-panel -->
+
+		<div class="row">
+		  <div id="panel-reclamacoes-table" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <table class="table table-hover table-striped">
+		      <thead>
+			<tr>
+			  <th>Nome</th><th>Apto</th><th>Bloco</th><th>Data</th><th></th>
+			</tr>
+		      </thead>
+		      <tbody></tbody>
+		    </table>
+		  </div>
+		</div>
 	      </div>
 	    </div><!-- /div#reclamacoes -->
 	    <div role="tabpanel" class="tab-pane fade" id="ocorrencias">
 	      <div class="content">
 		<h3>Ocorrências</h3>
 		<p class="lead">Implementação pendente.</p>
+	      </div>
+	    </div><!-- /div#ocorrencias -->
+	    <div role="tabpanel" class="tab-pane fade" id="usuarios">
+	      <div class="content">
+		<h3>Usuários</h3>
+		<div class="row">
+		  <div id="panel-usuarios-table" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <table class="table table-hover table-striped">
+		      <thead>
+			<tr>
+			  <th>Username</th><th>Tipo</th><th>Ativo</th><th></th>
+			</tr>
+		      </thead>
+		      <tbody></tbody>
+		    </table>
+		  </div>
+		</div>
 	      </div>
 	    </div><!-- /div#ocorrencias -->
 	    <div role="tabpanel" class="tab-pane fade" id="logout">

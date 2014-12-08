@@ -3,14 +3,20 @@ define([
     'jquery',
     'login', 
     'signup', 
+    'usuarios', 
     'moradores',
-    'funcionarios'], function(
+    'funcionarios',
+    'autorizadas',
+    'reclamacoes'], function(
 	u, 
 	$,
 	login,
 	signup,
+	usuarios,
 	moradores,
-	funcionarios) {
+	funcionarios,
+	autorizadas,
+	reclamacoes) {
 	[
 	    {
 		bind: function() {
@@ -21,6 +27,6 @@ define([
 			localStorage.clear();
 		    });
 		}
-	    }, login, signup, moradores, funcionarios
+	    }, login, signup, moradores, usuarios, funcionarios, autorizadas, reclamacoes
 	].forEach(function(fn) { fn.bind(); });
     });					     

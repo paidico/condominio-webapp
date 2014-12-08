@@ -1,4 +1,4 @@
-define(['utils', 'jquery', 'login'], function(u, $, login) {
+define(['utils', 'jquery'], function(u, $) {
     return {
 	bind: function() {
 	    $('#btn-signup').click(function(e) {
@@ -16,23 +16,28 @@ define(['utils', 'jquery', 'login'], function(u, $, login) {
 			}
 		    }
 
+		    if(param.usuario.username.length < 4 || param.usuario.password.length < 4) {
+			u.alert('danger', 'Nome de usuário ou senha não podem ter menos que 4 caracteres');
+			return;
+		    }
 		    if(param.usuario.password !== $('#txt-senha2-signup').val()) {
-			u.alert('warning', 'Confirmação de senha não confere');
+			u.alert('danger', 'Confirmação de senha não confere');
 			return;
 		    }
 		    this.reset();
 		    u['POST']('api/signup',
-			    param,
-			    function(retorno) {
-				if(retorno.sucesso && retorno.usuario) {
-				    login.access(retorno.usuario);
-				    return;
-				}
-				u.alert('warning', retorno.msg);
-			    },
-			    function() { 
-				u.alert('danger', 'Falha no serviço de registro'); 
-			    });
+			      param,
+			      function(retorno) {
+				  if(retorno.sucesso && retorno.usuario) {
+				      u.overlayPage('#login-page');
+				      u.alert('success', retorno.msg);
+				      return;
+				  }
+				  u.alert('warning', retorno.msg);
+			      },
+			      function() { 
+				  u.alert('danger', 'Falha no serviço de registro'); 
+			      });
 
 		});
 	    });

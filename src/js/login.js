@@ -2,7 +2,13 @@ define(['utils', 'jquery'], function(u, $) {
 
     var entrar = function(user) {
 	$('#lbl-user-presentation').html(user.username);
-
+	$('[data-type-permission="ADM"]').each(function() { 
+	    if(user.tipo != 'ADM') {
+		$(this).addClass('hidden');
+	    } else {
+		$(this).removeClass('hidden');
+	    }
+	});
 	u.applyFunctions([
 	    { fn: u.showTabByName, param: ['home'] },
 	    { fn: u.overlayPage, param: ['#main-page'] },
@@ -18,6 +24,7 @@ define(['utils', 'jquery'], function(u, $) {
 
     return {
 	bind: function() {
+
 	    u.overlayPage('#login-page');
 
 	    $('#login-page form').submit(function(e) {
@@ -31,17 +38,17 @@ define(['utils', 'jquery'], function(u, $) {
 		};
 		this.reset();
 		u['POST']('api/login', 
-			param, 
-			function(retorno) {
-			    if(retorno.sucesso && retorno.usuario) {
-				entrar(retorno.usuario);
-				return;
-			    }
-			    u.alert('warning', retorno.msg);
-			},
-			function() {
-			    u.alert('danger', 'Falha no serviço de acesso');
-			});
+			  param, 
+			  function(retorno) {
+			      if(retorno.sucesso && retorno.usuario) {
+				  entrar(retorno.usuario);
+				  return;
+			      }
+			      u.alert('warning', retorno.msg);
+			  },
+			  function() {
+			      u.alert('danger', 'Falha no serviço de acesso');
+			  });
 	    });
 	},
 	access: entrar
