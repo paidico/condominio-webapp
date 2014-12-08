@@ -3,11 +3,8 @@ define(['utils', 'jquery'], function(u, $) {
     var entrar = function(user) {
 	$('#lbl-user-presentation').html(user.username);
 	$('[data-type-permission="ADM"]').each(function() { 
-	    if(user.tipo != 'ADM') {
-		$(this).addClass('hidden');
-	    } else {
-		$(this).removeClass('hidden');
-	    }
+	    $(this)[(user.tipo != 'ADM' 
+		     ? 'addClass' : 'removeClass')]('hidden');
 	});
 	u.applyFunctions([
 	    { fn: u.showTabByName, param: ['home'] },
@@ -16,7 +13,7 @@ define(['utils', 'jquery'], function(u, $) {
 		fn: function() {
 		    localStorage.setItem(
 			'chaveUsuario', 
-			user.username + ',' + user.chave.codigo);
+			user.id + ',' + user.chave.codigo);
 		}
 	    }
 	]);

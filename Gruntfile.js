@@ -26,6 +26,7 @@ module.exports = function(grunt) {
 			'build/js/datepicker-pt-BR.min.js': [ 'lib/jquery-ui/datepicker-pt-BR.js' ],
 			'build/js/bootstrap-tab.min.js': [ 'node_modules/bootstrap/js/tab.js' ],
 			'build/js/bootstrap-alert.min.js': [ 'node_modules/bootstrap/js/alert.js' ],
+			'build/js/bootstrap-tooltip.min.js': [ 'node_modules/bootstrap/js/tooltip.js' ],
 			'build/lib/require.min.js': [ 'node_modules/requirejs/require.js' ]
 		    }
 		]

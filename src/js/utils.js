@@ -10,6 +10,7 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 	dataType: 'json',
 	beforeSend: function(jqxhr, settings) {
 	    settings.url = prefixo + settings.url;
+	    settings.xhrFields = { withCredentials: true  };
             jqxhr.setRequestHeader('x-chave-usuario', localStorage.getItem('chaveUsuario') || '');
 	}
     }),

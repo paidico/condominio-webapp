@@ -5,7 +5,8 @@ require.config({
 	'datepicker': 'jquery-ui.min',
 	'datepicker/pt-BR': 'datepicker-pt-BR.min',
 	'tab': 'bootstrap-tab.min',
-	'alert': 'bootstrap-alert.min'
+	'alert': 'bootstrap-alert.min',
+	'tooltip': 'bootstrap-tooltip.min'
     },
     shim: {
 	'alert': {
@@ -15,6 +16,10 @@ require.config({
 	'tab': {
 	    deps: ['jquery'],
 	    exports: '$.fn.tab'
+	},
+	'tooltip': {
+	    deps: ['jquery'],
+	    exports: '$.fn.tooltip'
 	},
 	'datepicker': {
 	    deps: ['jquery'],

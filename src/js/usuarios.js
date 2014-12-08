@@ -1,4 +1,4 @@
-define(['utils', 'jquery'], function(u, $) {
+define(['utils', 'jquery', 'tooltip'], function(u, $) {
 
     var populateUsuario = function(usuario) {
 
@@ -18,7 +18,12 @@ define(['utils', 'jquery'], function(u, $) {
 		    			       u['PUT'](url, { usuario: usuario }, listaUsuarios);
 					   })
 					   .addClass('btn btn-default')
-					   .attr('type', 'button')
+					   .attr({
+					       'type': 'button',
+					       'data-toggle': 'tooltip',
+					       // 'data-placement': 'right',
+					       'title': (usuario.ativo ? 'Desa' : 'A') + 'tivar'
+					   })
 					   .html($('<i>')
 		    				 .addClass('fa fa-toggle-' + (usuario.ativo ? 'off' : 'on'))))));
 
@@ -49,6 +54,9 @@ define(['utils', 'jquery'], function(u, $) {
 	bind: function() {
 	    // listar
 	    $('a[href="#usuarios"]').click(listaUsuarios);
+
+	    // ativar tooltip
+	    $('[data-toggle="tooltip"]').tooltip();
 	}
     };
 });
