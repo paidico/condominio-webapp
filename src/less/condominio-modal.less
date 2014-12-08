@@ -1,0 +1,235 @@
+// condomínio modal plugin css
+
+@zindex: 9999;
+@trans-over: 1ms opacity ease;
+@trans-fade-and-drop: 500ms top 500ms ease;
+@back-over: rgba(10, 10, 10, 0.6);
+@back-modal: transparent;
+@pad-t-b: 24px;
+@pad-r-l: 20px;
+@raio-borda: 2px;
+@font-size-close: 24px;
+@font-weight-close: 700;
+@color-close: #fff;
+@shadow-close: 0 6px 12px rgba(79, 90, 81, 0.7) inset;
+@back-close-from: rgba(82, 12, 26, 0.7);
+@back-close-to: lighten(@back-close-from, 20%);
+
+@layer-background: rgba(98, 102, 98, 0.4);
+@sombra-input: 0 6px 12px rgba(79, 90, 81, 0.7) inset;
+@borda-loading: 5px solid rgba(49, 90, 51, 0.7);
+@cor-fonte: #47644d;
+
+.transition(@regra) {
+    -webkit-transition: @regra;
+    -moz-transition: @regra;
+    -ms-transition: @regra;
+    -o-transition: @regra;
+    transition: @regra;
+}
+.transform(@regra) {
+    -webkit-transform: @regra;
+    -moz-transform: @regra;
+    -ms-transform: @regra;
+    -o-transform: @regra;
+    transform: @regra;
+}
+.background-top-right-linear(@de, @ate) {
+    background: @de;
+    background: linear-gradient(to left bottom,  @de,  @ate);
+    background: -ms-linear-gradient(to left bottom,  @de,  @ate);
+    background: -webkit-gradient(linear, right top, left bottom, from(@de), to(@ate));
+    background: -moz-linear-gradient(to left bottom,  @de,  @ate);
+}
+.box-shadow(@shadow) {
+    -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1
+    box-shadow: @shadow;
+}
+.condominio-comum() {
+    opacity: 0;
+    .transition(@trans-over);
+}
+
+.condominio-overlay {
+    .condominio-comum();
+    position: fixed;
+    z-index: @zindex - 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: @back-over;
+
+    &.condominio-open {
+	opacity: 1;
+    }
+    &.fade-and-drop {
+	display: block;
+	opacity: 0;
+	.transition(500ms opacity 500ms ease);
+
+	&.condominio-open {
+	    top: 0;
+	    .transition(500ms opacity ease);
+	    opacity: 1;
+	}
+    }
+
+}
+
+.condominio-modal {
+    .condominio-comum();
+    .transform(translate(-50%, -50%));
+    position: absolute;
+    z-index: @zindex;
+    top: 50%;
+    left: 50%;
+    width: 94%;
+    padding: @pad-t-b @pad-r-l;
+    border-radius: @raio-borda;
+    background: @back-modal;
+
+    &.condominio-open {
+	opacity: 1;
+
+	&.condominio-anchored {
+	    top: 20px;
+	    .transform(translate(-50%, 0));
+	}
+    }
+    &.fade-and-drop {
+	top: -300%;
+	opacity: 1;
+	display: block;
+	.transition(500ms top ease);
+
+	&.condominio-open {
+	    top: 50%;
+	    .transition(@trans-fade-and-drop);
+
+	    &.condominio-anchored {
+		.transition(@trans-fade-and-drop);
+	    }
+	}
+    }
+}
+
+.condominio-close {
+    font-size: @font-size-close;
+    font-weight: @font-weight-close;
+    line-height: @font-size-close / 2;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px 7px 7px;
+    cursor: pointer;
+    color: @color-close;
+    outline: none;
+    .background-top-right-linear(@back-close-from, @back-close-to);
+
+    &:active {
+	.box-shadow(@shadow-close);
+	background: @back-close-to;
+    }
+}
+
+#condominio-busy-modal {
+    .background-top-right-linear(#fff, @layer-background);
+}
+
+@-moz-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+
+@-o-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+
+@-webkit-keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+
+@keyframes rotate-loading {
+    0%  {transform: rotate(0deg);-ms-transform: rotate(0deg); -webkit-transform: rotate(0deg); -o-transform: rotate(0deg); -moz-transform: rotate(0deg);}
+    100% {transform: rotate(360deg);-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); -o-transform: rotate(360deg); -moz-transform: rotate(360deg);}
+}
+
+@-moz-keyframes loading-text-opacity {
+    0%  {opacity: 0}
+    20% {opacity: 0}
+    50% {opacity: 1}
+    100%{opacity: 0}
+}
+
+
+@-o-keyframes loading-text-opacity {
+    0%  {opacity: 0}
+    20% {opacity: 0}
+    50% {opacity: 1}
+    100%{opacity: 0}
+}
+
+@-webkit-keyframes loading-text-opacity {
+    0%  {opacity: 0}
+    20% {opacity: 0}
+    50% {opacity: 1}
+    100%{opacity: 0}
+}
+
+@keyframes loading-text-opacity {
+    0%  {opacity: 0}
+    20% {opacity: 0}
+    50% {opacity: 1}
+    100%{opacity: 0}
+}
+
+.condominio-busy-overlay,
+.condominio-busy-content {
+    height: 100px;
+    position: relative;
+    width: 100px;
+    border-radius: 100%;
+    .box-shadow(@sombra-input);
+}
+
+.condominio-busy-overlay { 
+    margin: auto;// 40px auto; 
+}
+
+.condominio-busy-content {
+    border: @borda-loading;
+    border-color: lighten(@cor-fonte, 35%) lighten(@cor-fonte, 5%) lighten(@cor-fonte, 35%) lighten(@cor-fonte, 5%);
+    -moz-animation: rotate-loading 1.7s ease 0s infinite normal;
+    -moz-transform-origin: 50% 50%;
+    -o-animation: rotate-loading 1.7s ease 0s infinite normal;
+    -o-transform-origin: 50% 50%;
+    -webkit-animation: rotate-loading 1.7s ease 0s infinite normal;
+    -webkit-transform-origin: 50% 50%;
+    animation: rotate-loading 1.7s ease 0s infinite normal;
+    transform-origin: 50% 50%;
+}
+
+.condominio-busy-overlay .condominio-busy-content {
+    -webkit-transition: all 1.7s ease-in-out;
+    -moz-transition: all 1.7s ease-in-out;
+    -ms-transition: all 1.7s ease-in-out;
+    -o-transition: all 1.7s ease-in-out;
+    transition: all 1.7s ease-in-out;
+}
+
+#condominio-busy-text {
+    -moz-animation: loading-text-opacity 2s ease 0s infinite normal;
+    -o-animation: loading-text-opacity 2s ease 0s infinite normal;
+    -webkit-animation: loading-text-opacity 2s ease 0s infinite normal;
+    animation: loading-text-opacity 2s ease 0s infinite normal;
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 5px;
+    opacity: 0;
+    text-align: center;
+    top: 0;
+    width: 100px;
+}

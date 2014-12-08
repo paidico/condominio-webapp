@@ -1,6 +1,30 @@
-define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
+define(['condominio-modal', 'jquery', 'alert', 'tab', 'datepicker'], function(cModal, $) {
 
     var selAlertField = '#field-alert div',
+    busy = { 
+	isVisible: false,
+	modal: null,
+	show: function() {
+	    var self = this;
+	    if(!self.isVisible) {
+		self.modal = new cModal.Modal({ 
+		    content: document.querySelector("#condominio-busy-modal .condominio-busy-overlay"), 
+		    btnClose: false, 
+		    maxWidth: 100,
+		    minWidth: 0,
+		    onClose: function() { self.isVisible = false; }
+		});
+		self.modal.open();
+		self.isVisible = true;
+	    }
+	},
+	hide: function() {
+	    var self = this;
+	    if(self.isVisible) {
+		self.modal.close();
+	    }
+	}
+    },
     protocol = 'http',
     domain = 'localhost',
     port = '8086',
@@ -8,11 +32,13 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
     $.ajaxSetup({
 	contentType: 'application/json; charset=UTF-8',
 	dataType: 'json',
+	xhrFields: { withCredentials: true },
 	beforeSend: function(jqxhr, settings) {
+	    busy.show();
 	    settings.url = prefixo + settings.url;
-	    settings.xhrFields = { withCredentials: true  };
             jqxhr.setRequestHeader('x-chave-usuario', localStorage.getItem('chaveUsuario') || '');
-	}
+	},
+	complete: function() { setTimeout(function() { busy.hide(); }, 999); }
     }),
     ajaxError = function(retorno, callback) { 
 	alert('danger', retorno.msg); 
@@ -106,17 +132,8 @@ define(['jquery', 'alert', 'tab', 'datepicker'], function($) {
 		});
 		reader.readAsDataURL(img);
 	    });
-	}// ,
-	// serializeImagem: function(campo, callback) {
-	//     validateImagem(campo, function(img) {
-	// 	var reader = new FileReader();
-	// 	reader.addEventListener('load', function(ev) {
-	// 	    callback(ev.target.result);
-	// 	});
-	// 	reader.readAsText(img, 'base64');
-	//     });
-	// }
-	,
+	},
+	busy: busy,
 	overlayPage: function(pag) { 
 	    [
 		'#main-page', '#login-page', '#signup-page'

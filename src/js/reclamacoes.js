@@ -75,6 +75,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 						 .click(function() {
 						     saveReclamacao('PUT');
 						     fillForm(reclamacao);
+						     location.href = '#reclamacoes';
 						 })
 						 .addClass('btn btn-default')
 						 .attr('type', 'button')

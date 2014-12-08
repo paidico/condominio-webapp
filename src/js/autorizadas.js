@@ -82,6 +82,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 						 .click(function() {
 						     saveAutorizada('PUT');
 						     fillForm(autorizada);
+						     location.href = '#autorizados';
 						 })
 						 .addClass('btn btn-default')
 						 .attr('type', 'button')
@@ -134,6 +135,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 				 && retorno.autorizadas.length) {
 				  $('#panel-autorizadas-table > table tbody').empty();
 				  retorno.autorizadas.slice().forEach(populateAutorizada);
+				  location.href = '#panel-autorizadas-table';
 			      } else {
 				  u.alert('warning', 'Busca não retornou resultados');
 			      }

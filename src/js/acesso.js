@@ -23,7 +23,13 @@ define([
 		    $('#btn-sair').click(function() {
 			u.overlayPage('#login-page');
 			$('form').each(function() { this.reset(); });
-			$('img.img-thumb').each(function() { this.src = 'images/picture.png'; });
+			$('img.img-thumb').each(function() { this.setAttribute('src', 'images/picture.png'); });
+			u['POST']('api/logout',
+				  { 
+				      usuario: { 
+					  id: localStorage.getItem('chaveUsuario').split(',')[0] 
+				      }
+				  });
 			localStorage.clear();
 		    });
 		}

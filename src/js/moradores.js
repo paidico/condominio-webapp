@@ -60,7 +60,6 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
     };
 
     var populateMorador = function(morador) {
-
 	$('#panel-moradores-table > table tbody')
 	    .append($('<tr>')
 		    // nome
@@ -88,6 +87,8 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 						 .click(function() {
 						     saveMorador('PUT');
 						     fillForm(morador);
+						     location.href = '#moradores';
+
 						 })
 						 .addClass('btn btn-default')
 						 .attr('type', 'button')
@@ -105,7 +106,6 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 						   .append('&nbsp;Excluir')))));
     };
     var listaMoradores = function() {
-
 	$('#panel-moradores-table > table tbody').empty();
 
 	u['GET']('api/moradores',
@@ -140,6 +140,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 				 && retorno.moradores.length) {
 				  $('#panel-moradores-table > table tbody').empty();
 				  retorno.moradores.slice().forEach(populateMorador);
+				  location.href = '#panel-moradores-table';
 			      } else {
 				  u.alert('warning', 'Busca não retornou resultados');
 			      }
@@ -159,6 +160,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    // form submit
 	    $('#morador-form-panel form').submit(function(e) {
 		e.preventDefault();
+
 		var param = {
 		    morador: {
 			nome: $('#txt-morador-nome').val(),
@@ -185,6 +187,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
     			      listaMoradores();
 	    		      clearForm();
 			  });	
+		
 	    });
 	    
 	    // criar

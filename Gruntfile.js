@@ -39,6 +39,7 @@ module.exports = function(grunt) {
 		},
 		files: {
 		    'build/css/bootstrap.css': 'src/less/bootstrap.less',
+		    'build/css/condominio-modal.css': 'src/less/condominio-modal.less',
 		    'build/css/condominio.css': 'src/less/condominio.less'
 		}
 	    }

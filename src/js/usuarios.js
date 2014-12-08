@@ -2,6 +2,8 @@ define(['utils', 'jquery', 'tooltip'], function(u, $) {
 
     var populateUsuario = function(usuario) {
 
+	setTimeout(function() { $('[data-toggle="tooltip"]').tooltip(); }, 2000);
+
 	$('#panel-usuarios-table > table tbody')
 	    .append($('<tr>')
 		    // username
@@ -21,7 +23,7 @@ define(['utils', 'jquery', 'tooltip'], function(u, $) {
 					   .attr({
 					       'type': 'button',
 					       'data-toggle': 'tooltip',
-					       // 'data-placement': 'right',
+					       'data-placement': 'right',
 					       'title': (usuario.ativo ? 'Desa' : 'A') + 'tivar'
 					   })
 					   .html($('<i>')
@@ -54,9 +56,6 @@ define(['utils', 'jquery', 'tooltip'], function(u, $) {
 	bind: function() {
 	    // listar
 	    $('a[href="#usuarios"]').click(listaUsuarios);
-
-	    // ativar tooltip
-	    $('[data-toggle="tooltip"]').tooltip();
 	}
     };
 });

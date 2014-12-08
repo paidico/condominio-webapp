@@ -98,6 +98,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 						 .click(function() {
 						     saveFuncionario('PUT');
 						     fillForm(funcionario);
+						     location.href= '#funcionarios';
 						 })
 						 .addClass('btn btn-default')
 						 .attr('type', 'button')
@@ -115,7 +116,6 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 						   .append('&nbsp;Excluir')))));
     };
     var listaFuncionarios = function() {
-
 	$('#panel-funcionarios-table > table tbody').empty();
 
 	u['GET']('api/funcionarios',
@@ -150,6 +150,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 				 && retorno.funcionarios.length) {
 				  $('#panel-funcionarios-table > table tbody').empty();
 				  retorno.funcionarios.slice().forEach(populateFuncionario);
+				  location.href = '#panel-funcionarios-table';
 			      } else {
 				  u.alert('warning', 'Busca não retornou resultados');
 			      }
@@ -171,6 +172,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    // form submit
 	    $('#funcionario-form-panel form').submit(function(e) {
 		e.preventDefault();
+
 		var param = {
 		    funcionario: {
 			nome: $('#txt-funcionario-nome').val(),
