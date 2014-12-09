@@ -7,7 +7,8 @@ define([
     'moradores',
     'funcionarios',
     'autorizadas',
-    'reclamacoes'], function(
+    'reclamacoes',
+    'ocorrencias'], function(
 	u, 
 	$,
 	login,
@@ -16,7 +17,8 @@ define([
 	moradores,
 	funcionarios,
 	autorizadas,
-	reclamacoes) {
+	reclamacoes,
+	ocorrencias) {
 	[
 	    {
 		bind: function() {
@@ -33,6 +35,6 @@ define([
 			localStorage.clear();
 		    });
 		}
-	    }, login, signup, moradores, usuarios, funcionarios, autorizadas, reclamacoes
+	    }, login, signup, moradores, usuarios, funcionarios, autorizadas, reclamacoes, ocorrencias
 	].forEach(function(fn) { fn.bind(); });
     });					     

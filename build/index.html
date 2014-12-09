@@ -467,7 +467,7 @@
 	    </div><!-- /div#autorizados -->
 	    <div role="tabpanel" class="tab-pane fade" id="reclamacoes">
 	      <div class="content">
-		<h3>Reclamações</h3>
+		<h3>Reclamações por moradores</h3>
 		<div class="row">
 		  <div id="panel-reclamacoes" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
 		    <hr />
@@ -558,8 +558,77 @@
 	    </div><!-- /div#reclamacoes -->
 	    <div role="tabpanel" class="tab-pane fade" id="ocorrencias">
 	      <div class="content">
-		<h3>Ocorrências</h3>
-		<p class="lead">Implementação pendente.</p>
+		<h3>Ocorrências com funcionários</h3>
+		<div class="row">
+		  <div id="panel-ocorrencias" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" class="form-inline">
+		      <div class="form-group">
+			<button id="btn-new-ocorrencia" type="button" class="btn btn-default">
+			  <i class="fa fa-plus"></i>&nbsp;Nova
+			</button>
+		      </div>
+		    </form>
+
+		  </div> <!-- div#panel-ocorrencias -->
+		</div>
+		<div id="ocorrencia-form-panel" class="row hidden">
+		  <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <form role="form" action="post">
+		      <div class="form-group col-xs-12">
+			<label for="txt-ocorrencia-id" class="sr-only">ID</label>
+			<input type="text" class="form-control" id="txt-ocorrencia-id" placeholder="ID" disabled="true" readonly="true">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-8">
+			<label for="txt-ocorrencia-abridor" class="sr-only">Quem abre</label>
+			<input type="text" class="form-control" id="txt-ocorrencia-abridor" placeholder="Quem abre">
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <span class="input-group-addon"><i class="fa fa-navicon"></i>&nbsp;Funcionário</span>
+			  <select id="lst-ocorrencia-fnc" class="form-control"></select>
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12 col-md-4">
+			<div class="input-group">
+			  <label for="txt-ocorrencia-dt" class="sr-only">Data</label>
+			  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+			  <input type="date" class="form-control" id="txt-ocorrencia-dt" placeholder="Data">
+			</div>
+		      </div>
+		      <div class="form-group col-xs-12">
+			<label for="txt-ocorrencia-descricao" class="sr-only">Descrição</label>
+			<textarea class="form-control" id="txt-ocorrencia-descricao" rows="3" placeholder="Descrição"></textarea>
+		      </div>	
+		      <div class="form-group col-xs-12">
+			<hr />
+			<div class="row">
+			  <div class="col-xs-6 col-md-3">
+			    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i>&nbsp;OK</button>
+			  </div>
+			  <div class="col-xs-6 col-md-3">
+			    <button type="reset" id="ocorrencia-form-eraser" class="btn btn-default btn-block"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>
+			  </div>
+			</div>
+		      </div>
+		    </form>
+		  </div>
+		</div> <!-- /div#ocorrencia-form-panel -->
+
+		<div class="row">
+		  <div id="panel-ocorrencias-table" class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1">
+		    <hr />
+		    <table class="table table-hover table-striped">
+		      <thead>
+			<tr>
+			  <th>Nome</th><th>Funcionário</th><th>Data</th><th></th>
+			</tr>
+		      </thead>
+		      <tbody></tbody>
+		    </table>
+		  </div>
+		</div>
 	      </div>
 	    </div><!-- /div#ocorrencias -->
 	    <div role="tabpanel" class="tab-pane fade" id="usuarios">
