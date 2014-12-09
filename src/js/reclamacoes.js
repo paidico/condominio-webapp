@@ -30,9 +30,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
     };
 
     var clearForm = function(action, id) {
-
 	$('#reclamacao-form-panel').addClass('hidden');
-	$('#reclamacao-form-panel form')[0].reset();
 
 	$('#reclamacao-form-panel form').attr('action', action);
 	$('#txt-reclamacao-id').val(id);

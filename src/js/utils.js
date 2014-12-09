@@ -25,6 +25,7 @@ define(['condominio-modal', 'jquery', 'alert', 'tab', 'datepicker'], function(cM
 	    }
 	}
     },
+    timeoutId = null,
     protocol = 'http',
     domain = 'localhost',
     port = '8086',
@@ -34,11 +35,14 @@ define(['condominio-modal', 'jquery', 'alert', 'tab', 'datepicker'], function(cM
 	dataType: 'json',
 	xhrFields: { withCredentials: true },
 	beforeSend: function(jqxhr, settings) {
-	    busy.show();
+	    timeoutId = setTimeout(function() { busy.show(); }, 50);
 	    settings.url = prefixo + settings.url;
             jqxhr.setRequestHeader('x-chave-usuario', localStorage.getItem('chaveUsuario') || '');
 	},
-	complete: function() { setTimeout(function() { busy.hide(); }, 999); }
+	complete: function() { 
+	    clearTimeout(timeoutId);
+	    setTimeout(function() { busy.hide(); }, 50);
+	}
     }),
     ajaxError = function(retorno, callback) { 
 	alert('danger', retorno.msg); 

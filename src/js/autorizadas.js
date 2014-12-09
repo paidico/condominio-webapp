@@ -30,9 +30,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
     };
 
     var clearForm = function(action, id) {
-
 	$('#autorizada-form-panel').addClass('hidden');
-	$('#autorizada-form-panel form')[0].reset();
 
 	$('#autorizada-form-panel form').attr('action', action);
 	$('#txt-autorizada-id').val(id);

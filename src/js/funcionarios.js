@@ -30,11 +30,9 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
     };
 
     var clearForm = function(action, id) {
-
 	$('#funcionario-form-panel').addClass('hidden');
-	$('#funcionario-form-panel form')[0].reset();
-	$('#img-funcionario-thumb').attr('src', 'images/picture.png');
 
+	$('#img-funcionario-thumb').attr('src', 'images/picture.png');
 	$('#funcionario-form-panel form').attr('action', action);
 	$('#txt-funcionario-id').val(id);
     };

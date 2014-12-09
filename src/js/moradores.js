@@ -30,11 +30,9 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
     };
 
     var clearForm = function(action, id) {
-
 	$('#morador-form-panel').addClass('hidden');
-	$('#morador-form-panel form')[0].reset();
-	$('#img-morador-thumb').attr('src', 'images/picture.png');
 
+	$('#img-morador-thumb').attr('src', 'images/picture.png');
 	$('#morador-form-panel form').attr('action', action);
 	$('#txt-morador-id').val(id);
     };
