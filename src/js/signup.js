@@ -28,7 +28,7 @@ define(['utils', 'jquery'], function(u, $) {
 		    u['POST']('api/signup',
 			      param,
 			      function(retorno) {
-				  if(retorno.sucesso && retorno.usuario) {
+				  if(retorno.sucesso) {
 				      u.overlayPage('#login-page');
 				      u.alert('success', retorno.msg);
 				      return;
