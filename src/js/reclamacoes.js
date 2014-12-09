@@ -152,7 +152,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    $('#btn-new-reclamacao').click(function() { saveReclamacao('POST'); });
 
 	    // listar
-	    $('a[href="#autorizados"]').click(listaReclamacoes);
+	    $('a[href="#reclamacoes"]').click(listaReclamacoes);
 	}
     };
 });

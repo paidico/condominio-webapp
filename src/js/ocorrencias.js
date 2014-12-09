@@ -147,7 +147,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    $('#btn-new-ocorrencia').click(function() { saveOcorrencia('POST'); });
 
 	    // listar
-	    $('a[href="#autorizados"]').click(function() {
+	    $('a[href="#ocorrencias"]').click(function() {
 		listaOcorrencias();
 
 		// popular lista de funcionários

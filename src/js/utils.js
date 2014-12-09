@@ -35,13 +35,13 @@ define(['condominio-modal', 'jquery', 'alert', 'tab', 'datepicker'], function(cM
 	dataType: 'json',
 	xhrFields: { withCredentials: true },
 	beforeSend: function(jqxhr, settings) {
-	    timeoutId = setTimeout(function() { busy.show(); }, 50);
+	    timeoutId = setTimeout(function() { busy.show(); }, 555);
 	    settings.url = prefixo + settings.url;
             jqxhr.setRequestHeader('x-chave-usuario', localStorage.getItem('chaveUsuario') || '');
 	},
 	complete: function() { 
 	    clearTimeout(timeoutId);
-	    setTimeout(function() { busy.hide(); }, 50);
+	    setTimeout(function() { busy.hide(); }, 555);
 	}
     }),
     ajaxError = function(retorno, callback) { 
