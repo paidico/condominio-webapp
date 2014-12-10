@@ -127,7 +127,7 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 		e.preventDefault();
 		var param = {
 		    ocorrencia: {
-			nome: $('#txt-ocorrencia-nome').val(),
+			abridor: $('#txt-ocorrencia-abridor').val(),
 			_funcionario: $('#lst-ocorrencia-fnc').first(':selected').val(),
 			dt: $('#txt-ocorrencia-dt').datepicker('getDate'),
 			descricao: $('#txt-ocorrencia-descricao').val()
@@ -144,7 +144,11 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    });
 	    
 	    // criar
-	    $('#btn-new-ocorrencia').click(function() { saveOcorrencia('POST'); });
+	    $('#btn-new-ocorrencia').click(function() { 
+		saveOcorrencia('POST'); 
+		$(this).closest('form')[0].reset();
+		$('#ocorrencia-form-panel form')[0].reset();
+	    });
 
 	    // listar
 	    $('a[href="#ocorrencias"]').click(function() {

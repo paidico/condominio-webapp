@@ -189,7 +189,11 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    });
 	    
 	    // criar
-	    $('#btn-new-morador').click(function() { saveMorador('POST'); });
+	    $('#btn-new-morador').click(function() { 
+		saveMorador('POST'); 
+		$(this).closest('form')[0].reset();
+		$('#morador-form-panel form')[0].reset();
+	    });
 
 	    // listar
 	    $('a[href="#moradores"]').click(listaMoradores);

@@ -177,7 +177,11 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    });
 	    
 	    // criar
-	    $('#btn-new-autorizada').click(function() { saveAutorizada('POST'); });
+	    $('#btn-new-autorizada').click(function() { 
+		saveAutorizada('POST'); 
+		$(this).closest('form')[0].reset();
+		$('#autorizada-form-panel form')[0].reset();
+	    });
 
 	    // listar
 	    $('a[href="#autorizados"]').click(listaAutorizadas);

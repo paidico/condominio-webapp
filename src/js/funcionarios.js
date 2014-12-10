@@ -200,7 +200,11 @@ define(['utils', 'jquery', 'datepicker'], function(u, $) {
 	    });
 	    
 	    // criar
-	    $('#btn-new-funcionario').click(function() { saveFuncionario('POST'); });
+	    $('#btn-new-funcionario').click(function() { 
+		saveFuncionario('POST'); 
+		$(this).closest('form')[0].reset();
+		$('#funcionario-form-panel form')[0].reset();
+	    });
 
 	    // listar
 	    $('a[href="#funcionarios"]').click(listaFuncionarios);
